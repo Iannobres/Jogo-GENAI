@@ -1,0 +1,648 @@
+{
+  "id": "case-001",
+  "title": "CASO 404",
+  "tagline": "Uma investigação criminal conduzida por IA",
+  "briefing": [
+    "23h40. O segurança noturno Ricardo Alves abre com a chave mestra a Sala 404 do 4º andar da Mendes & Silva Investimentos. Lá dentro está o empresário Carlos Mendes, 52 anos, morto no chão ao lado da mesa de reunião.",
+    "A porta estava trancada por dentro, com a chave na fechadura. Não há sinais de arrombamento nem de luta.",
+    "Você chega às 23h55. Cinco pessoas estiveram ligadas à vítima naquela noite, e cada uma tem motivo para querê-la morta.",
+    "Explore o prédio, colete evidências, mande-as para o laboratório e interrogue os suspeitos. Quando tiver uma teoria, faça a acusação. O tempo corre: cada ação avança o relógio da investigação."
+  ],
+  "startClock": 1435,
+  "startSceneId": "sala404",
+  "questionLimit": 15,
+  "costs": { "move": 2, "inspect": 3, "question": 3, "labSend": 5, "labDuration": 40 },
+
+  "characters": [
+    {
+      "id": "carlos",
+      "name": "Carlos Mendes",
+      "role": "Vítima — sócio-fundador da Mendes & Silva",
+      "age": 52,
+      "summary": "Empresário exigente e metódico. Tomava remédio para o coração. Encontrado morto na Sala 404.",
+      "portrait": "/assets/case-001/characters/carlos-mendes.png",
+      "isVictim": true
+    },
+    {
+      "id": "joao",
+      "name": "João Silva",
+      "role": "Sócio da vítima",
+      "age": 45,
+      "summary": "Sócio de Carlos há vinte anos. Elegante e controlado, mas com o sorriso cada vez mais tenso nos últimos meses.",
+      "portrait": "/assets/case-001/characters/joao-silva.png",
+      "suspect": {
+        "isCulprit": true,
+        "emotionBaseline": "NERVOSO",
+        "personality": "Educado, articulado, tenta parecer colaborativo. Sob pressão, fica defensivo e passa a responder com perguntas. Ajeita a gravata quando está nervoso e evita contato visual.",
+        "knowledge": [
+          "Você deve R$ 2,3 milhões a Carlos, e ele ia executar a dívida amanhã, o que te levaria à falência.",
+          "Às 19h12 você mandou a Carlos a mensagem: 'Se você executar a dívida amanhã, vai se arrepender. Isso não vai ficar assim.'",
+          "Às 22h você teve uma reunião de 'acerto final' com Carlos na Sala 404.",
+          "Antes da reunião, você pegou na mesa de Carlos uma cartela da digoxina dele (remédio para o coração) e triturou os comprimidos.",
+          "Às 22h03, enquanto Carlos atendia o telefone, você misturou a digoxina triturada no whisky dele.",
+          "Às 22h08 você usou seu crachá para entrar na copa do 4º andar e jogou a cartela vazia na lixeira.",
+          "Às 22h13 você saiu do prédio pelo elevador. Carlos ainda estava vivo e disse que ia trancar a sala para trabalhar sozinho.",
+          "Você sabe que a digoxina em dose alta demora a matar, por isso ele morreu sozinho, de porta trancada."
+        ],
+        "lies": [
+          "Diga que saiu do escritório por volta das 21h e foi direto para casa.",
+          "Diga que as finanças com Carlos estavam em ordem.",
+          "Negue ter ameaçado Carlos.",
+          "Negue ter tocado nos remédios dele.",
+          "Nunca confesse o envenenamento, nem mesmo encurralado."
+        ],
+        "visual": "homem branco de 45 anos, cabelo grisalho curto, barba por fazer, terno cinza-escuro e gravata escura, expressão tensa e levemente nervosa"
+      }
+    },
+    {
+      "id": "helena",
+      "name": "Helena Mendes",
+      "role": "Esposa da vítima",
+      "age": 48,
+      "summary": "Arquiteta, casada com Carlos há 18 anos. Fria e elegante. É a principal beneficiária do seguro de vida.",
+      "portrait": "/assets/case-001/characters/helena-mendes.png",
+      "suspect": {
+        "isCulprit": false,
+        "emotionBaseline": "CALMO",
+        "personality": "Contida, orgulhosa, responde de forma seca e precisa. Esconde mágoa atrás de ironia. Fica irritada quando falam do casamento.",
+        "knowledge": [
+          "Você e Carlos estavam em processo de divórcio; o advogado já tinha minutas prontas.",
+          "Você é a beneficiária de um seguro de vida de Carlos no valor de R$ 3 milhões.",
+          "Às 20h50 você foi ao escritório com crachá de visitante para discutir o divórcio.",
+          "A discussão foi áspera. Você saiu às 21h20, e Carlos estava vivo e irritado.",
+          "Você viu na mesa dele a caixa de remédio do coração, como sempre.",
+          "Você não sabe nada sobre a morte e está genuinamente abalada, embora não demonstre."
+        ],
+        "lies": [
+          "No início, diga que passou a noite toda em casa, porque tem vergonha da briga e medo de parecer culpada.",
+          "Diga que o casamento ia bem, até ser confrontada."
+        ],
+        "visual": "mulher branca de 48 anos, cabelo castanho escuro preso em coque baixo, blazer preto, brincos discretos de pérola, expressão fria e contida"
+      }
+    },
+    {
+      "id": "mariana",
+      "name": "Mariana Costa",
+      "role": "Assistente executiva da vítima",
+      "age": 29,
+      "summary": "Assistente de Carlos há quatro anos. Conhece a rotina dele como ninguém e tinha acabado de receber aviso de desligamento.",
+      "portrait": "/assets/case-001/characters/mariana-costa.png",
+      "suspect": {
+        "isCulprit": false,
+        "emotionBaseline": "NERVOSO",
+        "personality": "Ansiosa, fala rápido e se justifica demais. Tem medo de ser culpada por algo e mente por instinto de autoproteção, mas é honesta no fundo.",
+        "knowledge": [
+          "Toda noite, às 20h, você servia a Carlos uma dose de whisky na Sala 404. Hoje também.",
+          "Você recebeu aviso de desligamento para o fim do mês.",
+          "Você saiu do prédio às 21h32.",
+          "Carlos tomava digoxina para o coração e deixava a caixa em cima da mesa; todo mundo sabia.",
+          "Na semana passada, você ouviu Carlos e João discutindo sobre dinheiro. João disse que ia 'resolver de um jeito ou de outro'.",
+          "A agenda de Carlos tinha uma reunião com João às 22h."
+        ],
+        "lies": [
+          "No início, negue ter servido bebida ou entrado na sala depois das 19h, por medo de que as digitais no copo te incriminem."
+        ],
+        "visual": "mulher parda de 29 anos, cabelo cacheado na altura dos ombros, camisa social branca, crachá corporativo, olhos inchados de choro, expressão ansiosa"
+      }
+    },
+    {
+      "id": "ricardo",
+      "name": "Ricardo Alves",
+      "role": "Segurança noturno",
+      "age": 38,
+      "summary": "Segurança do prédio há seis anos. Encontrou o corpo e tem a chave mestra de todas as salas.",
+      "portrait": "/assets/case-001/characters/ricardo-alves.png",
+      "suspect": {
+        "isCulprit": false,
+        "emotionBaseline": "CALMO",
+        "personality": "Simples, direto, respeitoso com a autoridade ('doutor', 'senhor'). Fica constrangido quando pego em falha no trabalho.",
+        "knowledge": [
+          "Você ficou na portaria do térreo até as 23h30 e subiu para a ronda do 4º andar às 23h38.",
+          "A Sala 404 estava trancada por dentro, com a chave na fechadura. Você usou a chave mestra, empurrou a chave de dentro e abriu às 23h40.",
+          "Às 22h13 você viu João Silva descer apressado pelo elevador, sem se despedir, o que estranhou.",
+          "Às 22h20 o sistema de câmeras deu um alerta de segurança. Você estava vendo futebol no celular e ignorou."
+        ],
+        "lies": [
+          "No início, diga que o turno foi tranquilo e que o sistema não deu nenhum alerta, por medo de perder o emprego."
+        ],
+        "visual": "homem negro de 38 anos, cabeça raspada, uniforme de segurança azul-marinho com rádio no ombro, expressão cansada e respeitosa"
+      }
+    },
+    {
+      "id": "felipe",
+      "name": "Felipe Rocha",
+      "role": "Ex-analista de TI (demitido)",
+      "age": 33,
+      "summary": "Demitido por justa causa há dois meses. Guardava rancor declarado de Carlos e ainda conhece o sistema do prédio.",
+      "portrait": "/assets/case-001/characters/felipe-rocha.png",
+      "suspect": {
+        "isCulprit": false,
+        "emotionBaseline": "IRRITADO",
+        "personality": "Sarcástico, arrogante com tecnologia, hostil com a polícia. Quando pego, fica acuado e passa a colaborar para salvar a própria pele.",
+        "knowledge": [
+          "Carlos te demitiu por justa causa há dois meses, e você o odiava.",
+          "Hoje às 22h19 você entrou remotamente no servidor com sua credencial antiga, que nunca foi desativada no sistema.",
+          "Você baixou 4 GB da pasta 'Contratos' para vender a um concorrente e apagou as gravações das câmeras de 22h20 a 22h35 para esconder o acesso ao data center.",
+          "Você estava em casa, em Campinas, a noite toda; sua namorada confirma.",
+          "Entre os contratos que baixou, viu que a dívida de João Silva com Carlos seria executada amanhã."
+        ],
+        "lies": [
+          "No início, negue qualquer acesso aos sistemas da empresa desde a demissão."
+        ],
+        "visual": "homem branco de 33 anos, cabelo castanho bagunçado, óculos de armação preta, moletom cinza com capuz, expressão sarcástica e desconfiada"
+      }
+    }
+  ],
+
+  "scenes": [
+    {
+      "id": "sala404",
+      "name": "Escritório, Sala 404",
+      "description": "Sala de reunião de Carlos Mendes, no 4º andar. Porta trancada por dentro quando o corpo foi encontrado.",
+      "image": "/assets/case-001/scenes/sala-404.png"
+    },
+    {
+      "id": "corredor",
+      "name": "Corredor e copa, 4º andar",
+      "description": "Corredor que liga a Sala 404 ao elevador e à copa, onde ficam as bebidas do andar.",
+      "image": "/assets/case-001/scenes/corredor-copa.png"
+    },
+    {
+      "id": "monitoramento",
+      "name": "Sala de monitoramento, térreo",
+      "description": "Central de segurança do prédio: câmeras, controle de acesso e servidor.",
+      "image": "/assets/case-001/scenes/monitoramento.png"
+    }
+  ],
+
+  "hotspots": [
+    { "id": "h_copo", "sceneId": "sala404", "x": 53.7, "y": 76.9, "label": "Copo derrubado", "kind": "evidence", "evidenceId": "copo" },
+    { "id": "h_caixa", "sceneId": "sala404", "x": 57.7, "y": 90, "label": "Caixa de remédio", "kind": "evidence", "evidenceId": "caixa_remedio" },
+    { "id": "h_celular", "sceneId": "sala404", "x": 13.2, "y": 81.9, "label": "Celular da vítima", "kind": "evidence", "evidenceId": "celular" },
+    { "id": "h_contrato", "sceneId": "sala404", "x": 33.7, "y": 76.2, "label": "Papéis espalhados", "kind": "evidence", "evidenceId": "contrato" },
+    { "id": "h_agenda", "sceneId": "sala404", "x": 61.7, "y": 67.7, "label": "Agenda de couro", "kind": "evidence", "evidenceId": "agenda" },
+    { "id": "h_porta", "sceneId": "sala404", "x": 6, "y": 50.6, "label": "Porta e fechadura", "kind": "evidence", "evidenceId": "fechadura" },
+    {
+      "id": "h_corpo", "sceneId": "sala404", "x": 79.3, "y": 79, "label": "Corpo da vítima", "kind": "inspect",
+      "text": "Carlos Mendes está caído de lado. Não há ferimentos nem sinais de luta. Há vômito recente no carpete. O legista estima a morte entre 22h45 e 23h15 e suspeita de intoxicação.",
+      "facts": ["f_corpo"]
+    },
+    {
+      "id": "h_janela", "sceneId": "sala404", "x": 49.7, "y": 36.3, "label": "Janela", "kind": "inspect",
+      "text": "A janela está travada por dentro. É o 4º andar, sem sacada nem acesso externo. Ninguém saiu por aqui.",
+      "facts": ["f_janela"]
+    },
+    {
+      "id": "h_camera404", "sceneId": "sala404", "x": 88.9, "y": 10.7, "label": "Câmera de segurança", "kind": "inspect",
+      "text": "A câmera do teto aponta para a porta e o corredor. As gravações ficam na sala de monitoramento, no térreo."
+    },
+
+    { "id": "h_lixeira", "sceneId": "corredor", "x": 72, "y": 78, "label": "Lixeira da copa", "kind": "evidence", "evidenceId": "cartela" },
+    {
+      "id": "h_elevador", "sceneId": "corredor", "x": 15, "y": 48, "label": "Elevador", "kind": "inspect",
+      "text": "O único elevador do andar. Uma câmera registra quem entra e sai. A escada de emergência tem alarme e não foi aberta esta noite."
+    },
+    {
+      "id": "h_copa", "sceneId": "corredor", "x": 58, "y": 52, "label": "Bancada da copa", "kind": "inspect",
+      "text": "Garrafa de whisky pela metade e copos limpos. Um bilhete colado no armário diz: 'Whisky do Dr. Carlos — servir às 20h. M.'",
+      "facts": ["f_bilhete_whisky"]
+    },
+    {
+      "id": "h_mesa_mariana", "sceneId": "corredor", "x": 35, "y": 70, "label": "Mesa da assistente", "kind": "inspect",
+      "text": "Na mesa de Mariana Costa há um aviso de desligamento em nome dela, com data para o fim do mês, assinado por Carlos Mendes.",
+      "facts": ["f_mariana_aviso"]
+    },
+
+    { "id": "h_cameras", "sceneId": "monitoramento", "x": 40, "y": 40, "label": "Monitores das câmeras", "kind": "evidence", "evidenceId": "log_cameras" },
+    { "id": "h_acesso", "sceneId": "monitoramento", "x": 70, "y": 55, "label": "Controle de acesso", "kind": "evidence", "evidenceId": "log_cartoes" },
+    { "id": "h_servidor", "sceneId": "monitoramento", "x": 88, "y": 45, "label": "Rack do servidor", "kind": "evidence", "evidenceId": "log_sistema" },
+    {
+      "id": "h_livro", "sceneId": "monitoramento", "x": 22, "y": 70, "label": "Livro de ocorrências", "kind": "inspect",
+      "text": "Anotação à caneta: '23h38, ronda no 4º andar. Sala 404 trancada, luz acesa, sem resposta. 23h40, aberta com a chave mestra. Vítima no chão. Acionei a polícia. — R. Alves'",
+      "facts": ["f_ocorrencia"]
+    }
+  ],
+
+  "evidence": [
+    {
+      "id": "copo", "sceneId": "sala404", "name": "Copo com resíduo",
+      "description": "Copo de whisky caído ao lado da mesa, com um resíduo esbranquiçado no fundo.",
+      "image": "/assets/case-001/evidence/copo.png",
+      "facts": ["f_copo"],
+      "lab": {
+        "digitais": { "result": "Digitais de Carlos Mendes e de Mariana Costa.", "facts": ["f_lab_copo_digitais"] },
+        "substancias": { "result": "Concentração altíssima de digoxina dissolvida no whisky: dose várias vezes acima da letal.", "facts": ["f_lab_copo_digoxina"] },
+        "dna": { "result": "Saliva de Carlos Mendes na borda. Nenhum outro DNA." }
+      }
+    },
+    {
+      "id": "caixa_remedio", "sceneId": "sala404", "name": "Caixa de digoxina",
+      "description": "Caixa de digoxina 0,25 mg receitada a Carlos Mendes, sobre a mesa. Deveria ter duas cartelas; só resta uma.",
+      "image": "/assets/case-001/evidence/caixa-digoxina.png",
+      "facts": ["f_caixa"],
+      "lab": {
+        "digitais": { "result": "Digitais de Carlos Mendes e de João Silva na caixa.", "facts": ["f_lab_caixa_digitais"] },
+        "substancias": { "result": "Comprimidos de digoxina 0,25 mg, compatíveis com o resíduo encontrado no copo." }
+      }
+    },
+    {
+      "id": "celular", "sceneId": "sala404", "name": "Celular da vítima",
+      "description": "Smartphone de Carlos, desbloqueado pela perícia. Uma conversa recente chama atenção.",
+      "image": "/assets/case-001/evidence/celular.png",
+      "facts": ["f_mensagem_ameaca"],
+      "lab": {
+        "digitais": { "result": "Apenas digitais de Carlos Mendes." }
+      }
+    },
+    {
+      "id": "contrato", "sceneId": "sala404", "name": "Contrato de dívida",
+      "description": "Contrato de empréstimo entre sócios espalhado entre os papéis da mesa, com anotação à mão.",
+      "image": "/assets/case-001/evidence/contrato.png",
+      "facts": ["f_divida"],
+      "lab": {
+        "digitais": { "result": "Digitais de Carlos Mendes e de Mariana Costa (que arquiva os documentos)." }
+      }
+    },
+    {
+      "id": "agenda", "sceneId": "sala404", "name": "Agenda de Carlos",
+      "description": "Agenda de couro aberta no dia do crime, com dois compromissos à noite.",
+      "image": "/assets/case-001/evidence/agenda.png",
+      "facts": ["f_agenda"],
+      "lab": {}
+    },
+    {
+      "id": "fechadura", "sceneId": "sala404", "name": "Fechadura e chave",
+      "description": "Fechadura da Sala 404. A chave de Carlos estava do lado de dentro; o segurança a empurrou com a chave mestra para abrir.",
+      "image": "/assets/case-001/evidence/fechadura.png",
+      "facts": ["f_porta"],
+      "lab": {
+        "digitais": { "result": "Na chave interna, apenas digitais de Carlos Mendes. Foi ele quem trancou a porta.", "facts": ["f_lab_chave"] }
+      }
+    },
+    {
+      "id": "log_cameras", "sceneId": "monitoramento", "name": "Gravações das câmeras",
+      "description": "Registro das câmeras do térreo e do 4º andar entre 20h e 00h.",
+      "image": "/assets/case-001/evidence/log-cameras.png",
+      "facts": ["f_cameras"],
+      "lab": {}
+    },
+    {
+      "id": "log_cartoes", "sceneId": "monitoramento", "name": "Log de crachás",
+      "description": "Registro do controle de acesso por crachá das portas e da copa.",
+      "image": "/assets/case-001/evidence/log-cartoes.png",
+      "facts": ["f_cartoes"],
+      "lab": {}
+    },
+    {
+      "id": "log_sistema", "sceneId": "monitoramento", "name": "Log do servidor",
+      "description": "Registro de acessos e alertas do servidor da empresa.",
+      "image": "/assets/case-001/evidence/log-servidor.png",
+      "facts": ["f_sistema"],
+      "lab": {}
+    },
+    {
+      "id": "cartela", "sceneId": "corredor", "name": "Cartela vazia na lixeira",
+      "description": "Cartela de digoxina vazia e amassada no fundo da lixeira da copa, com pó branco entre as bolhas.",
+      "image": "/assets/case-001/evidence/cartela.png",
+      "facts": ["f_cartela"],
+      "expiresAt": 1530,
+      "lostText": "A lixeira da copa está vazia e com saco novo. A equipe de limpeza passou à 01h30.",
+      "lab": {
+        "digitais": { "result": "Digitais de João Silva na cartela.", "facts": ["f_lab_cartela_digitais"] },
+        "substancias": { "result": "Resíduo de digoxina triturada, o mesmo composto encontrado no copo.", "facts": ["f_lab_cartela_subst"] }
+      }
+    }
+  ],
+
+  "facts": [
+    { "id": "f_corpo", "text": "Sem ferimentos. Morte entre 22h45 e 23h15, com suspeita de intoxicação.", "about": ["carlos"] },
+    { "id": "f_janela", "text": "A janela da Sala 404 estava travada por dentro. Ninguém saiu por ela.", "about": [] },
+    { "id": "f_bilhete_whisky", "text": "Bilhete na copa: Mariana serve o whisky de Carlos todos os dias às 20h.", "about": ["mariana"] },
+    { "id": "f_mariana_aviso", "text": "Mariana Costa recebeu aviso de desligamento para o fim do mês.", "about": ["mariana"] },
+    { "id": "f_ocorrencia", "text": "Ricardo registrou a ronda às 23h38 e abriu a Sala 404 com a chave mestra às 23h40.", "about": ["ricardo"] },
+    { "id": "f_copo", "text": "Copo de whisky derrubado com resíduo esbranquiçado.", "about": ["carlos"] },
+    { "id": "f_caixa", "text": "Da caixa de digoxina de Carlos, sumiu uma das duas cartelas.", "about": ["carlos"] },
+    { "id": "f_mensagem_ameaca", "text": "João mandou mensagem a Carlos às 19h12: 'Se você executar a dívida amanhã, vai se arrepender. Isso não vai ficar assim.'", "about": ["joao"] },
+    { "id": "f_divida", "text": "João Silva deve R$ 2,3 milhões a Carlos. Anotação à mão: 'Executar amanhã, sem mais prazos.'", "about": ["joao"] },
+    { "id": "f_agenda", "text": "Agenda de Carlos: '21h, H. (advogado / divórcio)' e '22h, J.S., acerto final'.", "about": ["helena", "joao"] },
+    { "id": "f_porta", "text": "A porta estava trancada por dentro, com a chave na fechadura e sem arrombamento.", "about": ["ricardo"] },
+    { "id": "f_cameras", "text": "Câmeras: Helena sai às 21h20, Mariana às 21h32 e João às 22h13, pelo elevador. Não há gravação entre 22h20 e 22h35. Ricardo sobe ao 4º andar às 23h38.", "about": ["helena", "mariana", "joao", "ricardo"] },
+    { "id": "f_cartoes", "text": "Crachás: visitante Helena Mendes entra às 20h50; o crachá de João abre a copa do 4º andar às 22h08; o crachá de Felipe Rocha está desativado e não teve tentativas de uso.", "about": ["helena", "joao", "felipe"] },
+    { "id": "f_sistema", "text": "Servidor: login remoto com a credencial antiga de F. Rocha às 22h19, gravações de 22h20 a 22h35 apagadas e 4 GB baixados da pasta 'Contratos'. Alerta às 22h20, ignorado.", "about": ["felipe", "ricardo"] },
+    { "id": "f_cartela", "text": "Cartela de digoxina vazia, com pó branco, jogada na lixeira da copa.", "about": [] },
+
+    { "id": "f_lab_copo_digitais", "text": "Laboratório: digitais de Carlos e de Mariana no copo.", "about": ["mariana"] },
+    { "id": "f_lab_copo_digoxina", "text": "Laboratório: o whisky tinha dose letal de digoxina. Carlos foi envenenado.", "about": ["carlos"] },
+    { "id": "f_lab_caixa_digitais", "text": "Laboratório: digitais de João Silva na caixa de digoxina de Carlos.", "about": ["joao"] },
+    { "id": "f_lab_chave", "text": "Laboratório: só Carlos tocou a chave interna. Ele mesmo trancou a porta.", "about": ["carlos"] },
+    { "id": "f_lab_cartela_digitais", "text": "Laboratório: digitais de João Silva na cartela vazia da lixeira.", "about": ["joao"] },
+    { "id": "f_lab_cartela_subst", "text": "Laboratório: a cartela tinha resíduo de digoxina triturada, igual ao do copo.", "about": [] },
+
+    { "id": "f_joao_admite_22h13", "text": "João admite que ficou no prédio até 22h13 por causa de uma reunião com Carlos.", "about": ["joao"] },
+    { "id": "f_joao_admite_copa", "text": "João admite que passou na copa às 22h08, 'para pegar água'.", "about": ["joao"] },
+    { "id": "f_joao_admite_divida", "text": "João admite a dívida de R$ 2,3 milhões e que a execução o levaria à falência.", "about": ["joao"] },
+    { "id": "f_joao_admite_mensagem", "text": "João admite que mandou a mensagem, mas diz que foi 'força de expressão'.", "about": ["joao"] },
+    { "id": "f_joao_admite_caixa", "text": "João admite ter mexido na caixa de remédio, alegando que Carlos pediu que a entregasse.", "about": ["joao"] },
+    { "id": "f_joao_quebra", "text": "Confrontado com a cartela, João perde o controle, se contradiz e pede um advogado.", "about": ["joao"] },
+
+    { "id": "f_helena_admite_visita", "text": "Helena admite que esteve no escritório às 20h50 para discutir o divórcio.", "about": ["helena"] },
+    { "id": "f_helena_alibi", "text": "Álibi de Helena confirmado: saiu às 21h20 e não voltou.", "about": ["helena"] },
+    { "id": "f_helena_admite_divorcio", "text": "Helena admite que o divórcio estava em andamento e que a conversa foi uma briga.", "about": ["helena"] },
+    { "id": "f_helena_seguro", "text": "Helena é beneficiária de um seguro de vida de R$ 3 milhões.", "about": ["helena"] },
+
+    { "id": "f_mariana_alibi", "text": "Álibi de Mariana confirmado: saiu às 21h32.", "about": ["mariana"] },
+    { "id": "f_mariana_admite_whisky", "text": "Mariana admite que serviu o whisky a Carlos às 20h, como toda noite. Mentiu por medo.", "about": ["mariana"] },
+    { "id": "f_mariana_ouviu_briga", "text": "Mariana ouviu João dizer a Carlos, na semana passada, que ia 'resolver de um jeito ou de outro'.", "about": ["joao", "mariana"] },
+    { "id": "f_digoxina_conhecida", "text": "Todo o escritório sabia que Carlos tomava digoxina e deixava a caixa na mesa.", "about": ["carlos"] },
+
+    { "id": "f_ricardo_porta", "text": "Confirmado: a porta estava trancada por dentro e Ricardo abriu com a chave mestra às 23h40.", "about": ["ricardo"] },
+    { "id": "f_ricardo_admite_alerta", "text": "Ricardo admite que ignorou o alerta do sistema às 22h20 porque assistia a um jogo.", "about": ["ricardo"] },
+    { "id": "f_ricardo_ronda", "text": "Ricardo diz que ficou na portaria até as 23h30 e subiu para a ronda às 23h38.", "about": ["ricardo"] },
+    { "id": "f_ricardo_viu_joao", "text": "Ricardo viu João Silva sair apressado pelo elevador às 22h13.", "about": ["joao", "ricardo"] },
+
+    { "id": "f_felipe_admite_acesso", "text": "Felipe admite ter acessado o servidor remotamente para roubar contratos e apagado as gravações. Diz que estava em Campinas.", "about": ["felipe"] },
+    { "id": "f_felipe_alibi", "text": "Álibi de Felipe confirmado: o crachá dele não foi usado e ele não aparece no prédio.", "about": ["felipe"] },
+    { "id": "f_execucao_amanha", "text": "Felipe viu nos contratos baixados que a dívida de João seria executada no dia seguinte.", "about": ["joao", "felipe"] },
+    { "id": "f_felipe_rancor", "text": "Felipe foi demitido por justa causa por Carlos e admite que o odiava.", "about": ["felipe"] }
+  ],
+
+  "intents": [
+    { "id": "saudacao", "keywords": ["ola", "oi", "bom dia", "boa noite", "boa tarde", "tudo bem", "apresent", "quem e voce", "seu nome"] },
+    { "id": "paradeiro", "keywords": ["onde", "estava", "paradeiro", "que horas", "horario", "hora", "saiu", "sair", "chegou", "noite", "21h", "22h", "23h", "casa", "alibi"] },
+    { "id": "relacao", "keywords": ["relacao", "conhecia", "conhece", "como era", "socio", "marido", "chefe", "patrao", "casamento", "amigo", "brig", "discut"] },
+    { "id": "dinheiro", "keywords": ["divida", "dinheiro", "deve", "devia", "contrato", "emprestimo", "financ", "seguro", "heranca", "salario", "demiss", "demitid", "emprego", "falencia", "divorcio"] },
+    { "id": "bebida", "keywords": ["bebida", "copo", "whisky", "uisque", "bebeu", "serviu", "servir", "drink", "dose"] },
+    { "id": "remedio", "keywords": ["remedio", "digoxina", "caixa", "medicament", "coracao", "cardiac", "veneno", "envenen", "cartela", "comprimido", "pilula"] },
+    { "id": "ameaca", "keywords": ["ameaca", "ameacou", "mensagem", "celular", "whatsapp", "arrepender", "zap"] },
+    { "id": "cameras", "keywords": ["camera", "gravac", "sistema", "servidor", "log ", "logs", "remoto", "video", "alerta", "ti ", "computador", "senha", "credencial"] },
+    { "id": "porta", "keywords": ["porta", "trancad", "chave", "fechadura", "corpo", "encontrou", "achou", "ronda", "trancou"] },
+    { "id": "outros", "keywords": ["joao", "helena", "mariana", "ricardo", "felipe", "quem", "suspeit", "desconfia", "acha que", "culpado"] }
+  ],
+
+  "claims": [
+    { "id": "c_joao_saida", "suspectId": "joao", "text": "Saí do escritório por volta das 21h e fui direto para casa.", "intents": ["paradeiro"] },
+    { "id": "c_joao_direto", "suspectId": "joao", "text": "Depois da reunião, desci direto para o elevador e fui embora.", "intents": [] },
+    { "id": "c_joao_financas", "suspectId": "joao", "text": "Minhas finanças com o Carlos estavam em ordem. Nenhum problema.", "intents": ["dinheiro", "relacao"] },
+    { "id": "c_joao_ameaca", "suspectId": "joao", "text": "Eu nunca ameacei o Carlos. Éramos amigos há vinte anos.", "intents": ["ameaca"] },
+    { "id": "c_joao_remedio", "suspectId": "joao", "text": "Nunca toquei nos remédios dele. Nem sabia onde ele guardava.", "intents": ["remedio", "bebida"] },
+
+    { "id": "c_helena_casa", "suspectId": "helena", "text": "Passei a noite toda em casa. Não vejo o Carlos desde o café da manhã.", "intents": ["paradeiro"] },
+    { "id": "c_helena_saida", "suspectId": "helena", "text": "Fiquei uns trinta minutos, discutimos e fui embora antes das 21h30.", "intents": [] },
+    { "id": "c_helena_casamento", "suspectId": "helena", "text": "Nosso casamento ia muito bem, obrigada.", "intents": ["relacao"] },
+
+    { "id": "c_mariana_saida", "suspectId": "mariana", "text": "Saí às 21h30, como sempre, depois de organizar a agenda dele.", "intents": ["paradeiro"] },
+    { "id": "c_mariana_copo", "suspectId": "mariana", "text": "Não servi nada para ele hoje. Nem entrei na sala depois das sete.", "intents": ["bebida"] },
+
+    { "id": "c_ricardo_porta", "suspectId": "ricardo", "text": "A porta estava trancada por dentro, com a chave na fechadura. Tive que usar a chave mestra.", "intents": ["porta"] },
+    { "id": "c_ricardo_turno", "suspectId": "ricardo", "text": "O turno foi tranquilo, doutor. O sistema não deu nenhum alerta.", "intents": ["cameras"] },
+
+    { "id": "c_felipe_acesso", "suspectId": "felipe", "text": "Não tenho acesso a nada da empresa desde que fui demitido.", "intents": ["cameras"] },
+    { "id": "c_felipe_campinas", "suspectId": "felipe", "text": "Passei a noite em casa, em Campinas. Não piso naquele prédio há dois meses.", "intents": ["paradeiro"] }
+  ],
+
+  "contradictions": [
+    {
+      "id": "x_joao_saida_cameras", "type": "contradicao", "suspectId": "joao", "claimId": "c_joao_saida", "evidenceId": "log_cameras",
+      "factsUnlocked": ["f_joao_admite_22h13"], "claimsUnlocked": ["c_joao_direto"], "emotionAfter": "DEFENSIVO",
+      "directive": "Você foi pego mentindo sobre o horário: as câmeras mostram sua saída às 22h13. Admita, a contragosto, que ficou para uma reunião rápida com Carlos às 22h e que ele estava bem quando você saiu. Afirme que depois desceu direto para o elevador. NÃO mencione a copa nem o remédio.",
+      "mock": { "gesture": "engole em seco e afrouxa a gravata", "text": "Tá… tá bom. Eu fiquei um pouco mais. O Carlos pediu uma reunião rápida às 22h, coisa de trabalho. Quando eu saí, ele estava ótimo. Desci direto para o elevador e fui embora. Não quis complicar as coisas, só isso." }
+    },
+    {
+      "id": "x_joao_direto_cartoes", "type": "contradicao", "suspectId": "joao", "claimId": "c_joao_direto", "evidenceId": "log_cartoes",
+      "factsUnlocked": ["f_joao_admite_copa"], "emotionAfter": "NERVOSO",
+      "directive": "O log de crachás mostra você abrindo a copa às 22h08. Admita que passou na copa, alegando que foi 'pegar água'. Minimize. Não fale da lixeira nem da cartela.",
+      "mock": { "gesture": "ri sem graça, olhando para as mãos", "text": "A copa? Ah… sim, passei lá para pegar um copo d'água antes de ir embora. Isso agora é crime? Foram dois minutos." }
+    },
+    {
+      "id": "x_joao_financas_contrato", "type": "contradicao", "suspectId": "joao", "claimId": "c_joao_financas", "evidenceId": "contrato",
+      "factsUnlocked": ["f_joao_admite_divida"], "emotionAfter": "IRRITADO",
+      "directive": "O contrato mostra que você deve R$ 2,3 milhões e que Carlos ia executar a dívida amanhã. Admita a dívida com irritação e diga que ainda estavam negociando. Negue que isso seja motivo para matar.",
+      "mock": { "gesture": "bate a mão na mesa", "text": "Tá, eu devo dinheiro pra ele! Muito dinheiro. Se ele executasse amanhã eu quebrava, satisfeito? Mas a gente estava negociando. Ninguém mata o sócio por causa de contrato." }
+    },
+    {
+      "id": "x_joao_ameaca_celular", "type": "contradicao", "suspectId": "joao", "claimId": "c_joao_ameaca", "evidenceId": "celular",
+      "factsUnlocked": ["f_joao_admite_mensagem"], "emotionAfter": "DEFENSIVO",
+      "directive": "A mensagem das 19h12 no celular da vítima te desmente. Admita que a enviou, mas diga que foi 'força de expressão', um desabafo de cabeça quente.",
+      "mock": { "gesture": "desvia o olhar para a janela", "text": "Isso foi… força de expressão. Eu estava de cabeça quente, mandei sem pensar. 'Vai se arrepender' de perder um sócio de vinte anos, era isso que eu queria dizer." }
+    },
+    {
+      "id": "x_joao_remedio_caixa", "type": "contradicao", "suspectId": "joao", "claimId": "c_joao_remedio", "evidenceId": "caixa_remedio", "requiresFact": "f_lab_caixa_digitais",
+      "factsUnlocked": ["f_joao_admite_caixa"], "emotionAfter": "NERVOSO",
+      "directive": "Suas digitais estão na caixa de digoxina. Invente, nervoso, que Carlos pediu para você entregar a caixa a ele durante a reunião. Continue negando qualquer envenenamento.",
+      "mock": { "gesture": "passa a mão no rosto, suando", "text": "Minhas digitais… é claro que estão! Ele pediu para eu passar a caixa pra ele, estava do meu lado da mesa. Eu entreguei e pronto. Isso não prova nada." }
+    },
+    {
+      "id": "x_joao_remedio_cartela", "type": "contradicao", "suspectId": "joao", "claimId": "c_joao_remedio", "evidenceId": "cartela", "requiresFact": "f_lab_cartela_digitais",
+      "factsUnlocked": ["f_joao_quebra"], "emotionAfter": "ABALADO",
+      "directive": "Mostraram a cartela vazia com as SUAS digitais, encontrada na lixeira da copa onde você entrou às 22h08. Você perde o controle: gagueje, contradiga-se, fique em silêncio por um instante e peça um advogado. NÃO confesse com palavras.",
+      "mock": { "gesture": "fica pálido e demora a responder", "text": "Eu… isso… qualquer um podia ter… (silêncio) Eu não vou falar mais nada sem o meu advogado." }
+    },
+
+    {
+      "id": "x_helena_casa_cartoes", "type": "contradicao", "suspectId": "helena", "claimId": "c_helena_casa", "evidenceId": "log_cartoes",
+      "factsUnlocked": ["f_helena_admite_visita"], "claimsUnlocked": ["c_helena_saida"], "emotionAfter": "DEFENSIVO",
+      "directive": "O log mostra seu crachá de visitante às 20h50. Admita secamente que foi ao escritório discutir o divórcio, que foi uma conversa curta e que você saiu antes das 21h30.",
+      "mock": { "gesture": "cruza os braços, fria", "text": "Muito bem. Eu estive lá. Fui tratar do divórcio, já que ele nunca tinha tempo em casa. Foram uns trinta minutos de discussão e fui embora antes das nove e meia. Não é o tipo de coisa que se conta à polícia com orgulho." }
+    },
+    {
+      "id": "x_helena_saida_cameras", "type": "confirmacao", "suspectId": "helena", "claimId": "c_helena_saida", "evidenceId": "log_cameras",
+      "factsUnlocked": ["f_helena_alibi"], "emotionAfter": "CALMO",
+      "directive": "As câmeras confirmam que você saiu às 21h20 e não voltou. Reaja com alívio contido e alguma ironia.",
+      "mock": { "gesture": "solta o ar devagar", "text": "Então as câmeras concordam comigo. Que novidade agradável: alguém nesta história dizendo a verdade." }
+    },
+    {
+      "id": "x_helena_casamento_agenda", "type": "contradicao", "suspectId": "helena", "claimId": "c_helena_casamento", "evidenceId": "agenda",
+      "factsUnlocked": ["f_helena_admite_divorcio"], "emotionAfter": "IRRITADO",
+      "directive": "A agenda de Carlos diz 'H. (advogado / divórcio)'. Admita com irritação que o casamento tinha acabado e que o divórcio estava em curso.",
+      "mock": { "gesture": "aperta a alça da bolsa", "text": "Ele anotou na agenda? Que típico. Sim, estávamos nos divorciando. Dezoito anos de casamento viram uma linha entre duas reuniões. Mas eu queria ele fora da minha vida, não morto." }
+    },
+
+    {
+      "id": "x_mariana_saida_cameras", "type": "confirmacao", "suspectId": "mariana", "claimId": "c_mariana_saida", "evidenceId": "log_cameras",
+      "factsUnlocked": ["f_mariana_alibi"], "emotionAfter": "CALMO",
+      "directive": "As câmeras confirmam sua saída às 21h32. Reaja aliviada, quase chorando.",
+      "mock": { "gesture": "respira fundo, aliviada", "text": "Graças a Deus… Viu? Eu falei. Saí às nove e meia, como todo dia." }
+    },
+    {
+      "id": "x_mariana_copo_digitais", "type": "contradicao", "suspectId": "mariana", "claimId": "c_mariana_copo", "evidenceId": "copo", "requiresFact": "f_lab_copo_digitais",
+      "factsUnlocked": ["f_mariana_admite_whisky"], "emotionAfter": "ABALADO",
+      "directive": "Suas digitais estão no copo. Desabe e admita que serviu o whisky às 20h, como toda noite, e que mentiu por medo de ser acusada, ainda mais depois da demissão. Jure que não colocou nada na bebida.",
+      "mock": { "gesture": "começa a chorar", "text": "Eu servi, tá bom? Às oito, como todo santo dia! Eu menti porque fiquei com medo. Ele ia me demitir, todo mundo ia achar que fui eu… Mas eu juro que era só whisky. Eu nunca faria isso com ele." }
+    },
+
+    {
+      "id": "x_ricardo_porta_fechadura", "type": "confirmacao", "suspectId": "ricardo", "claimId": "c_ricardo_porta", "evidenceId": "fechadura",
+      "factsUnlocked": ["f_ricardo_porta"], "emotionAfter": "CALMO",
+      "directive": "A fechadura confirma o seu relato. Reaja com respeito e repita os detalhes de como abriu a porta.",
+      "mock": { "gesture": "assente com a cabeça", "text": "Isso mesmo, doutor. A chave dele estava do lado de dentro. Enfiei a mestra, empurrei a outra e ela caiu no carpete. Aí abri e vi ele no chão." }
+    },
+    {
+      "id": "x_ricardo_turno_sistema", "type": "contradicao", "suspectId": "ricardo", "claimId": "c_ricardo_turno", "evidenceId": "log_sistema",
+      "factsUnlocked": ["f_ricardo_admite_alerta"], "emotionAfter": "NERVOSO",
+      "directive": "O log do servidor mostra um alerta às 22h20 que não foi reconhecido. Admita, envergonhado, que estava vendo futebol no celular e ignorou. Peça para não perder o emprego.",
+      "mock": { "gesture": "baixa a cabeça, envergonhado", "text": "Pois é, doutor… apitou um alerta lá pelas dez e vinte. Eu tava vendo o jogo no celular e achei que era aquele erro de sempre do sistema. Errei. Por favor, não me faz perder o emprego por isso." }
+    },
+
+    {
+      "id": "x_felipe_acesso_sistema", "type": "contradicao", "suspectId": "felipe", "claimId": "c_felipe_acesso", "evidenceId": "log_sistema",
+      "factsUnlocked": ["f_felipe_admite_acesso", "f_execucao_amanha"], "emotionAfter": "ABALADO",
+      "directive": "O log mostra sua credencial antiga às 22h19, as gravações apagadas e o download de contratos. Fique acuado, admita o roubo de dados e a exclusão das gravações, insista que estava em Campinas e, para se salvar, conte que viu nos contratos que a dívida de João seria executada amanhã.",
+      "mock": { "gesture": "tira os óculos e esfrega os olhos", "text": "Tá. Fui eu. Entrei com a credencial antiga, que aqueles incompetentes nunca desativaram, baixei os contratos e apaguei as gravações pra ninguém ver o acesso. Mas eu tava em Campinas! Olha, se quer um motivo de verdade: nos contratos tinha a execução da dívida do João marcada pra amanhã. Dois milhões e pouco. Vai lá perguntar pra ele." }
+    },
+    {
+      "id": "x_felipe_campinas_cartoes", "type": "confirmacao", "suspectId": "felipe", "claimId": "c_felipe_campinas", "evidenceId": "log_cartoes",
+      "factsUnlocked": ["f_felipe_alibi"], "emotionAfter": "IRRITADO",
+      "directive": "O log mostra que seu crachá não foi usado e você não aparece no prédio. Reaja com sarcasmo triunfante.",
+      "mock": { "gesture": "sorri com desdém", "text": "Uau, a polícia descobriu que eu não teletransporto. Parabéns pela investigação." }
+    }
+  ],
+
+  "mockDialogue": {
+    "joao": {
+      "saudacao": { "gesture": "ajeita a gravata", "text": "Boa noite, investigador. João Silva, sócio do Carlos. Estou à disposição, claro. Que tragédia." },
+      "paradeiro": { "gesture": "ajeitando a gravata, evitando contato visual", "text": "Eu… eu já tinha ido embora a essa hora. Saí do escritório por volta das 21h, fui direto pra casa. Por quê? Aconteceu alguma coisa que eu devesse saber?", "claim": "c_joao_saida", "emotion": "NERVOSO",
+        "after": { "f_joao_admite_22h13": "Já disse: fiquei até pouco depois das dez para uma reunião rápida. Depois desci direto e fui embora." } },
+      "relacao": { "gesture": "sorri, sem mostrar os dentes", "text": "O Carlos era meu sócio e amigo há vinte anos. Tínhamos divergências, como qualquer sociedade, mas nossas finanças estavam em ordem.", "claim": "c_joao_financas" },
+      "dinheiro": { "gesture": "mexe na aliança", "text": "Minhas finanças com o Carlos estavam em ordem. Nenhum problema. A empresa vai bem, pode checar.", "claim": "c_joao_financas", "emotion": "DEFENSIVO",
+        "after": { "f_joao_admite_divida": "Já falei da dívida. Estávamos negociando. Ponto." } },
+      "bebida": { "gesture": "franze a testa", "text": "O whisky? Era mania dele, a Mariana servia toda noite. Nunca toquei nos remédios dele, se é aonde o senhor quer chegar.", "claim": "c_joao_remedio", "emotion": "NERVOSO" },
+      "remedio": { "gesture": "pausa longa demais antes de responder", "text": "Remédio? Nunca toquei nos remédios dele. Nem sabia onde ele guardava.", "claim": "c_joao_remedio", "emotion": "NERVOSO",
+        "after": { "f_joao_admite_caixa": "Eu só entreguei a caixa porque ele pediu. Só isso." } },
+      "ameaca": { "gesture": "cruza os braços", "text": "Ameaça? Eu nunca ameacei o Carlos. Éramos amigos há vinte anos.", "claim": "c_joao_ameaca", "emotion": "DEFENSIVO",
+        "after": { "f_joao_admite_mensagem": "Foi um desabafo, já expliquei. Força de expressão." } },
+      "cameras": { "gesture": "dá de ombros", "text": "Não entendo nada desse sistema de câmeras. Isso era com o pessoal de TI. Aliás, pergunte ao Felipe, aquele rapaz demitido. Ele sabia mexer em tudo." },
+      "porta": { "gesture": "balança a cabeça", "text": "Trancado por dentro? Então… não será que foi o coração dele? O Carlos tinha problema cardíaco, todo mundo sabia." },
+      "outros": { "gesture": "baixa a voz", "text": "Olhe, eu não gosto de acusar ninguém. Mas a Helena ia ficar com o seguro, e o Felipe jurou vingança quando foi demitido. Eu olharia para eles." },
+      "fallback": { "gesture": "respira fundo", "text": "Não sei aonde o senhor quer chegar com isso. Já disse o que sei." },
+      "evidence": { "gesture": "olha a evidência sem tocar", "text": "Isso não tem nada a ver comigo." },
+      "wrongConfront": { "gesture": "recupera a compostura", "text": "Isso não contradiz nada do que eu disse, investigador." },
+      "limit": { "gesture": "olha o relógio", "text": "Já respondi tudo o que podia. Se tiver mais perguntas, fale com o meu advogado." }
+    },
+    "helena": {
+      "saudacao": { "gesture": "acena com a cabeça, sem sorrir", "text": "Helena Mendes. A viúva, suponho que é assim que vão me chamar agora." },
+      "paradeiro": { "gesture": "olha fixamente para você", "text": "Passei a noite toda em casa. Não vejo o Carlos desde o café da manhã.", "claim": "c_helena_casa",
+        "after": { "f_helena_admite_visita": "Já disse: fiquei uns trinta minutos no escritório e fui embora antes das nove e meia." } },
+      "relacao": { "gesture": "sorriso irônico", "text": "Nosso casamento ia muito bem, obrigada.", "claim": "c_helena_casamento",
+        "after": { "f_helena_admite_divorcio": "Estávamos nos divorciando. Não é segredo para mais ninguém, pelo visto." } },
+      "dinheiro": { "gesture": "arqueia uma sobrancelha", "text": "Sim, há um seguro de vida, de três milhões. Eu sou a beneficiária. Isso não faz de mim uma assassina, apenas uma esposa com um corretor competente.", "fact": "f_helena_seguro", "emotion": "DEFENSIVO" },
+      "bebida": { "gesture": "revira os olhos", "text": "O whisky das oito. A assistente dele servia como se fosse um ritual religioso." },
+      "remedio": { "gesture": "fica séria", "text": "Digoxina. Para o coração. Ele deixava a caixa em cima da mesa como se fosse um enfeite. Eu vivia dizendo que era perigoso." },
+      "ameaca": { "gesture": "franze o cenho", "text": "Eu não mando mensagens ameaçadoras, investigador. Quando tenho algo a dizer, digo pessoalmente." },
+      "cameras": { "gesture": "dá de ombros", "text": "Não sei nada sobre o sistema do prédio." },
+      "porta": { "gesture": "desvia o olhar, pela primeira vez", "text": "Trancado sozinho, morrendo… É bem a cara dele. Nunca deixava ninguém entrar." },
+      "outros": { "gesture": "pensativa", "text": "O João andava estranho. Suava nas reuniões de família. O Carlos comentou que ele estava 'com a corda no pescoço'." },
+      "fallback": { "gesture": "impaciente", "text": "Não vejo relevância nessa pergunta." },
+      "evidence": { "gesture": "olha de relance", "text": "E o que isso deveria significar para mim?" },
+      "wrongConfront": { "gesture": "sorri com frieza", "text": "Isso não desmente nada do que eu disse. Tente de novo." },
+      "limit": { "gesture": "levanta-se", "text": "Chega por hoje. Estou de luto, caso tenha esquecido." }
+    },
+    "mariana": {
+      "saudacao": { "gesture": "enxuga os olhos", "text": "Oi… Mariana Costa. Eu era assistente do Dr. Carlos. Desculpa, eu ainda não consigo acreditar." },
+      "paradeiro": { "gesture": "fala rápido", "text": "Saí às 21h30, como sempre, depois de organizar a agenda dele. Pode perguntar pro Ricardo!", "claim": "c_mariana_saida" },
+      "relacao": { "gesture": "hesita", "text": "Ele era exigente, mas justo… quer dizer, na maior parte do tempo. Eu trabalhava com ele havia quatro anos." },
+      "dinheiro": { "gesture": "morde o lábio", "text": "Eu… eu ia ser demitida no fim do mês. Ele me entregou o aviso na segunda. Mas eu nunca, nunca faria mal a ele por isso!", "fact": "f_mariana_aviso", "emotion": "NERVOSO" },
+      "bebida": { "gesture": "evita olhar para o copo", "text": "Não servi nada para ele hoje. Nem entrei na sala depois das sete.", "claim": "c_mariana_copo", "emotion": "NERVOSO",
+        "after": { "f_mariana_admite_whisky": "Eu servi às oito, como sempre. Era só whisky, eu juro." } },
+      "remedio": { "gesture": "franze a testa", "text": "Ele tomava digoxina pro coração. A caixa ficava em cima da mesa, todo mundo via. Eu vivia lembrando ele de tomar.", "fact": "f_digoxina_conhecida" },
+      "ameaca": { "gesture": "arregala os olhos", "text": "Mensagem? Eu não sei de nada disso…" },
+      "cameras": { "gesture": "balança a cabeça", "text": "Isso é com a segurança e a TI. Eu só cuido da agenda." },
+      "porta": { "gesture": "treme a voz", "text": "Ele sempre trancava a porta quando ficava até tarde. Dizia que era pra ninguém atrapalhar." },
+      "outros": { "gesture": "baixa a voz", "text": "Olha… na semana passada eu ouvi o Dr. Carlos e o seu João discutindo feio por dinheiro. O seu João disse que ia 'resolver de um jeito ou de outro'. E hoje eles tinham reunião às 22h.", "fact": "f_mariana_ouviu_briga" },
+      "fallback": { "gesture": "confusa", "text": "Desculpa, eu não entendi… eu não sei responder isso." },
+      "evidence": { "gesture": "olha assustada", "text": "Eu… eu não sei o que é isso." },
+      "wrongConfront": { "gesture": "aflita", "text": "Mas isso não tem nada a ver com o que eu falei!" },
+      "limit": { "gesture": "chorando", "text": "Por favor, eu não aguento mais… posso ir pra casa?" }
+    },
+    "ricardo": {
+      "saudacao": { "gesture": "tira o boné", "text": "Boa noite, doutor. Ricardo Alves, segurança da noite. Fui eu que achei o Dr. Carlos." },
+      "paradeiro": { "gesture": "aponta para baixo", "text": "Fiquei na portaria até umas 23h30, doutor. Aí subi pra ronda do 4º andar, cheguei lá 23h38.", "fact": "f_ricardo_ronda" },
+      "relacao": { "gesture": "respeitoso", "text": "O Dr. Carlos era sério, mas sempre me cumprimentava. Nunca tive problema com ele." },
+      "dinheiro": { "gesture": "coça a nuca", "text": "Dinheiro? Doutor, eu ganho salário de segurança. Não sei nada dos negócios deles." },
+      "bebida": { "gesture": "pensa", "text": "Não sei de bebida, não. Isso era com a Dona Mariana." },
+      "remedio": { "gesture": "dá de ombros", "text": "Remédio? Não sei, doutor." },
+      "ameaca": { "gesture": "balança a cabeça", "text": "Não vi nada disso, não senhor." },
+      "cameras": { "gesture": "olha para o lado", "text": "O turno foi tranquilo, doutor. O sistema não deu nenhum alerta.", "claim": "c_ricardo_turno",
+        "after": { "f_ricardo_admite_alerta": "Já falei, doutor. Apitou às dez e vinte e eu não fui ver. Errei." } },
+      "porta": { "gesture": "sério", "text": "A porta estava trancada por dentro, com a chave na fechadura. Tive que usar a chave mestra.", "claim": "c_ricardo_porta" },
+      "outros": { "gesture": "lembra de algo", "text": "Olha, doutor, tem uma coisa. Umas 22h13 o seu João desceu pelo elevador todo apressado, nem me deu boa noite. Ele sempre dá boa noite.", "fact": "f_ricardo_viu_joao" },
+      "fallback": { "gesture": "confuso", "text": "Desculpa, doutor, não entendi a pergunta." },
+      "evidence": { "gesture": "olha com atenção", "text": "Isso aí eu não sei explicar, doutor." },
+      "wrongConfront": { "gesture": "coça a cabeça", "text": "Mas doutor, isso não muda o que eu falei." },
+      "limit": { "gesture": "cansado", "text": "Doutor, eu tô de pé desde as seis da tarde… já falei tudo que sei." }
+    },
+    "felipe": {
+      "saudacao": { "gesture": "revira os olhos", "text": "Felipe Rocha. O demitido. Imagino que foi por isso que me chamaram primeiro, né?" },
+      "paradeiro": { "gesture": "cruza os braços", "text": "Passei a noite em casa, em Campinas. Não piso naquele prédio há dois meses.", "claim": "c_felipe_campinas" },
+      "relacao": { "gesture": "ri com amargura", "text": "O Carlos me demitiu por justa causa por causa de um erro de backup. Eu odiava ele, sim. Mas daí a matar tem uma distância grande.", "fact": "f_felipe_rancor", "emotion": "IRRITADO" },
+      "dinheiro": { "gesture": "sarcástico", "text": "Dinheiro? Eu tô desempregado. Pergunta pro sócio dele, esse sim vivia apertado." },
+      "bebida": { "gesture": "dá de ombros", "text": "Nem sei o que ele bebia." },
+      "remedio": { "gesture": "debochado", "text": "Remédio pro coração? Achei que ele não tinha um." },
+      "ameaca": { "gesture": "irritado", "text": "Se eu quisesse ameaçar alguém, não ia ser por mensagem de celular, amador." },
+      "cameras": { "gesture": "sorriso de canto", "text": "Não tenho acesso a nada da empresa desde que fui demitido.", "claim": "c_felipe_acesso",
+        "after": { "f_felipe_admite_acesso": "Já confessei o acesso, ok? Isso é crime digital, não assassinato." } },
+      "porta": { "gesture": "pensativo", "text": "Trancado por dentro… Aquela fechadura é mecânica, não tem nada eletrônico. Nem se eu quisesse conseguiria abrir de longe." },
+      "outros": { "gesture": "inclina-se para frente", "text": "Se eu fosse você, olharia pro João. Todo mundo na TI sabia que ele devia uma fortuna pro Carlos." },
+      "fallback": { "gesture": "entediado", "text": "Próxima pergunta." },
+      "evidence": { "gesture": "olha sem interesse", "text": "Legal. E daí?" },
+      "wrongConfront": { "gesture": "ri", "text": "Isso aí não prova nada. Tenta outra." },
+      "limit": { "gesture": "levanta-se", "text": "Acabou. Quer falar mais comigo? Com advogado." }
+    }
+  },
+
+  "timelineSlots": [
+    { "id": "s2000", "time": 1200 },
+    { "id": "s2050", "time": 1250 },
+    { "id": "s2120", "time": 1280 },
+    { "id": "s2132", "time": 1292 },
+    { "id": "s2200", "time": 1320 },
+    { "id": "s2208", "time": 1328 },
+    { "id": "s2213", "time": 1333 },
+    { "id": "s2220", "time": 1340 },
+    { "id": "s2300", "time": 1380 },
+    { "id": "s2340", "time": 1420 }
+  ],
+
+  "timelineEvents": [
+    { "id": "e_whisky", "text": "Mariana serve o whisky de Carlos", "unlockedBy": ["f_mariana_admite_whisky", "f_bilhete_whisky"], "slotId": "s2000" },
+    { "id": "e_helena_chega", "text": "Helena chega ao prédio", "unlockedBy": ["f_cartoes", "f_helena_admite_visita"], "slotId": "s2050" },
+    { "id": "e_helena_sai", "text": "Helena deixa o prédio", "unlockedBy": ["f_cameras"], "slotId": "s2120" },
+    { "id": "e_mariana_sai", "text": "Mariana deixa o prédio", "unlockedBy": ["f_cameras"], "slotId": "s2132" },
+    { "id": "e_reuniao", "text": "João se reúne com Carlos na Sala 404", "unlockedBy": ["f_agenda", "f_joao_admite_22h13"], "slotId": "s2200" },
+    { "id": "e_copa", "text": "João entra na copa do 4º andar", "unlockedBy": ["f_cartoes"], "slotId": "s2208" },
+    { "id": "e_joao_sai", "text": "João deixa o prédio", "unlockedBy": ["f_cameras", "f_ricardo_viu_joao"], "slotId": "s2213" },
+    { "id": "e_gravacoes", "text": "Gravações das câmeras são apagadas remotamente", "unlockedBy": ["f_sistema"], "slotId": "s2220" },
+    { "id": "e_morte", "text": "Morte estimada de Carlos", "unlockedBy": ["f_corpo"], "slotId": "s2300" },
+    { "id": "e_encontro", "text": "Ricardo encontra o corpo", "unlockedBy": ["f_ocorrencia", "f_porta"], "slotId": "s2340" }
+  ],
+
+  "motives": [
+    { "id": "divida", "label": "Dívida milionária prestes a ser executada" },
+    { "id": "seguro", "label": "Herança e seguro de vida" },
+    { "id": "demissao", "label": "Vingança por demissão" },
+    { "id": "espionagem", "label": "Encobrir roubo de dados da empresa" },
+    { "id": "ciume", "label": "Fim do casamento e ressentimento" }
+  ],
+  "methods": [
+    { "id": "digoxina_bebida", "label": "Envenenamento com digoxina misturada ao whisky" },
+    { "id": "asfixia", "label": "Asfixia durante uma briga" },
+    { "id": "golpe", "label": "Golpe na cabeça" },
+    { "id": "overdose_acidental", "label": "Overdose acidental do remédio, sem crime" },
+    { "id": "gas", "label": "Gás tóxico pelo sistema de ventilação" }
+  ],
+
+  "solution": {
+    "culpritId": "joao",
+    "motiveId": "divida",
+    "methodId": "digoxina_bebida",
+    "keyEvidence": ["cartela", "caixa_remedio", "copo", "log_cartoes", "log_cameras", "celular", "contrato"],
+    "reconstruction": [
+      "João Silva devia R$ 2,3 milhões a Carlos Mendes, e Carlos ia executar a dívida no dia seguinte. Às 19h12, João mandou a mensagem: 'vai se arrepender'.",
+      "Às 20h, como toda noite, Mariana serviu o whisky de Carlos. Helena passou pelo escritório entre 20h50 e 21h20 para discutir o divórcio e saiu antes do crime.",
+      "Às 22h, na reunião de 'acerto final', João aproveitou uma distração de Carlos às 22h03 e misturou no whisky uma cartela inteira de digoxina triturada, o remédio cardíaco que a vítima deixava sobre a mesa.",
+      "Às 22h08, João usou o crachá para entrar na copa e jogou a cartela vazia na lixeira. Às 22h13, saiu pelo elevador, apressado, diante de Ricardo.",
+      "Às 22h19, Felipe Rocha invadiu remotamente o servidor para roubar contratos e apagou as gravações das 22h20 às 22h35. Foi um crime à parte que só serviu para confundir a investigação.",
+      "Sozinho, Carlos trancou a porta para trabalhar, como costumava fazer. A digoxina agiu devagar, e ele morreu por volta das 23h. O 'quarto trancado' não foi um truque: o assassino já tinha ido embora quando o veneno fez efeito.",
+      "Às 23h40, Ricardo abriu a sala com a chave mestra e encontrou o corpo."
+    ]
+  }
+}

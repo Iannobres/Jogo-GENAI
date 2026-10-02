@@ -1,6 +1,6 @@
 # Prompts de imagem: Bing Image Creator (DALL·E 3)
 
-Guia para gerar todos os assets visuais do CASO 404 com o mesmo estilo dos dois que já existem (João Silva e Sala 404).
+Guia para gerar todos os assets visuais do CASO 404 com um estilo consistente. Gere todos no mesmo modelo para não haver diferença visual entre eles.
 
 **Como usar:**
 1. Abra https://www.bing.com/images/create.
@@ -20,12 +20,17 @@ Formato: quadrado ou retrato (3:4), plano fechado no rosto. O jogo recorta com `
 
 | Arquivo | Status |
 |---|---|
-| `joao-silva.png` | ✅ pronto (Figura 1 do CP4) |
+| `joao-silva.png` | 🔁 regerar no mesmo modelo dos demais |
 | `carlos-mendes.png` | ⬜ gerar |
 | `helena-mendes.png` | ⬜ gerar |
 | `mariana-costa.png` | ⬜ gerar |
 | `ricardo-alves.png` | ⬜ gerar |
 | `felipe-rocha.png` | ⬜ gerar |
+
+**joao-silva.png**
+```
+Fotografia realista de um homem branco de 45 anos, cabelo castanho escuro curto com têmporas grisalhas, terno cinza-chumbo e gravata azul-escura levemente afrouxada, expressão nervosa e tensa, testa levemente suada, sorriso forçado, olhando para a câmera em um escritório corporativo com luz fria, estilo still de investigação policial, alta qualidade, foco no rosto, plano fechado.
+```
 
 **carlos-mendes.png** (vítima, foto de arquivo corporativa, viva)
 ```
@@ -60,9 +65,15 @@ Formato: **16:9**, plano aberto. São as telas de exploração.
 
 | Arquivo | Status |
 |---|---|
-| `sala-404.png` | ✅ pronto (Figura 2 do CP4) |
+| `sala-404.png` | 🔁 regerar no mesmo modelo dos demais |
 | `corredor-copa.png` | ⬜ gerar |
 | `monitoramento.png` | ⬜ gerar |
+
+**sala-404.png**
+```
+Fotografia realista de uma sala de reunião executiva de escritório corporativo à noite, luz fria e dramática, à esquerda uma porta de madeira escura fechada, ao fundo uma janela com as luzes da cidade, ao centro uma mesa de vidro com um copo de whisky tombado, uma agenda de couro e papéis espalhados, em primeiro plano um celular e uma caixa de remédio no carpete, à direita um homem de terno caído no chão ao lado da mesa, no canto superior direito uma câmera de segurança no teto, atmosfera de cena de crime investigativa, estilo cinematográfico, plano aberto, 16:9.
+```
+> Se o Bing bloquear o prompt por causa do corpo, troque "um homem de terno caído no chão" por "a silhueta de um homem de terno deitado imóvel no carpete, fora de foco".
 
 **corredor-copa.png**
 ```

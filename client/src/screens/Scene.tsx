@@ -1,37 +1,26 @@
 import { formatClock, LAB_TEST_LABEL, type PublicHotspot } from '@caso404/shared';
 import { useMemo, useState, type MouseEvent } from 'react';
 import { AssetImage } from '../components/AssetImage';
+import { IconClose, IconExit, IconHelp } from '../components/icons';
 import { StatusBadge } from '../components/ui';
 import { useCaseLookup, useGame } from '../store/game';
 
 const DEBUG = new URLSearchParams(location.search).has('debug');
+// Largura da cena: cabe na altura da tela (descontando cabeçalho e barra de ações).
+const SCENE_WIDTH = 'max-w-[min(100%,calc((100dvh-10rem)*16/9))]';
 
-function Hotspot({ h, index, done, showLabel, onClick }: { h: PublicHotspot; index: number; done: boolean; showLabel: boolean; onClick: () => void }) {
+/** Área clicável sem número nem nome: só aparece (cantos de visor) ao passar o mouse. */
+function Hotspot({ h, onClick }: { h: PublicHotspot; onClick: () => void }) {
   return (
     <button
       onClick={(e) => {
         e.stopPropagation();
         onClick();
       }}
-      className="group absolute -translate-x-1/2 -translate-y-1/2 focus:outline-none"
-      style={{ left: `${h.x}%`, top: `${h.y}%` }}
+      className={`hotspot-area absolute cursor-pointer rounded-[2px] ${DEBUG ? 'debug' : ''}`}
+      style={{ left: `${h.x - h.w / 2}%`, top: `${h.y - h.h / 2}%`, width: `${h.w}%`, height: `${h.h}%` }}
       aria-label={h.label}
-    >
-      <span
-        className={`flex h-7 w-7 items-center justify-center rounded-full border-2 text-xs font-black sm:h-8 sm:w-8 ${
-          done ? 'border-slate-400/70 bg-slate-900/70 text-slate-300' : 'hotspot-pulse border-clue bg-black/60 text-clue'
-        } transition group-hover:scale-110 group-focus-visible:ring-2 group-focus-visible:ring-accent`}
-      >
-        {done ? '✓' : index}
-      </span>
-      <span
-        className={`pointer-events-none absolute left-1/2 top-full mt-1 -translate-x-1/2 whitespace-nowrap rounded bg-black/85 px-2 py-0.5 text-[11px] font-semibold text-slate-100 ${
-          showLabel ? '' : 'opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100'
-        }`}
-      >
-        {h.label}
-      </span>
-    </button>
+    />
   );
 }
 
@@ -52,13 +41,13 @@ function InventoryDrawer() {
     <div className="fixed inset-0 z-40 flex justify-end bg-black/50" onClick={() => setInventory(false)}>
       <aside className="panel fade-up flex h-full w-full max-w-md flex-col rounded-none border-y-0 border-r-0" onClick={(e) => e.stopPropagation()}>
         <div className="flex items-center justify-between border-b border-edge p-4">
-          <h2 className="text-lg font-bold">🎒 Inventário de evidências</h2>
-          <button className="btn px-3 py-1" onClick={() => setInventory(false)}>
-            ✕
+          <h2 className="text-lg font-bold">Inventário de evidências</h2>
+          <button className="btn btn-icon" onClick={() => setInventory(false)} aria-label="Fechar">
+            <IconClose />
           </button>
         </div>
         <div className="flex-1 overflow-y-auto p-4">
-          {items.length === 0 && <p className="text-sm text-slate-400">Nenhuma evidência coletada ainda. Clique nos pontos amarelos da cena.</p>}
+          {items.length === 0 && <p className="text-sm text-slate-400">Nenhuma evidência coletada ainda. Passe o mouse pela cena e clique no que parecer importante.</p>}
           <div className="grid grid-cols-2 gap-3">
             {items.map((e) => (
               <button
@@ -90,7 +79,7 @@ function InventoryDrawer() {
               )}
               {selStatus !== 'perdida' && (
                 <button className="btn mt-3" onClick={() => go('lab')}>
-                  🔬 Ir ao laboratório
+                  Ir ao laboratório
                 </button>
               )}
             </div>
@@ -108,9 +97,9 @@ function MapOverlay() {
     <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/70 p-4" onClick={() => setMap(false)}>
       <div className="panel fade-up w-full max-w-3xl p-5" onClick={(e) => e.stopPropagation()}>
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-lg font-bold">🗺️ Mapa do prédio</h2>
-          <button className="btn px-3 py-1" onClick={() => setMap(false)}>
-            ✕
+          <h2 className="text-lg font-bold">Mapa do prédio</h2>
+          <button className="btn btn-icon" onClick={() => setMap(false)} aria-label="Fechar">
+            <IconClose />
           </button>
         </div>
         <div className="grid gap-3 sm:grid-cols-3">
@@ -139,7 +128,7 @@ function MapOverlay() {
 
 export function Scene() {
   const g = useGame();
-  const { session, caseData, settings } = g;
+  const { session, caseData } = g;
   const hotspots = useMemo(
     () => caseData?.hotspots.filter((h) => h.sceneId === session?.sceneId) ?? [],
     [caseData, session?.sceneId],
@@ -149,9 +138,6 @@ export function Scene() {
   const scene = caseData.scenes.find((s) => s.id === session.sceneId)!;
   const found = Object.values(session.evidence).filter((e) => e.status !== 'nao_descoberta' && e.status !== 'perdida').length;
   const pendingLab = session.lab.filter((l) => l.status === 'em_analise').length;
-
-  const isDone = (h: PublicHotspot) =>
-    h.kind === 'evidence' ? session.evidence[h.evidenceId!]?.status !== 'nao_descoberta' : session.inspectedHotspots.includes(h.id);
 
   const debugClick = (e: MouseEvent<HTMLDivElement>) => {
     if (!DEBUG) return;
@@ -164,39 +150,52 @@ export function Scene() {
 
   return (
     <div className="flex min-h-full flex-col items-center justify-center gap-3 p-2 sm:p-4">
+      {/* Saída e ajuda: canto superior esquerdo, fora da cena */}
+      <header className={`flex w-full items-center gap-2 ${SCENE_WIDTH}`}>
+        <button className="btn pl-2.5" onClick={() => g.go('menu')} title="Voltar ao menu principal (o progresso fica salvo)">
+          <IconExit />
+          Sair
+        </button>
+        <button className="btn pl-2.5" onClick={() => g.go('tutorial')}>
+          <IconHelp />
+          Como jogar
+        </button>
+      </header>
       {/* HUD (mobile: acima da cena) */}
       <div className="grid w-full grid-cols-3 gap-1 text-center text-[11px] font-bold sm:hidden">
-        <span className="rounded-full bg-panel px-2 py-1">📋 {found}/{caseData.evidence.length}</span>
-        <span className="rounded-full bg-panel px-2 py-1">🕒 {formatClock(session.clock)}</span>
-        <span className="rounded-full bg-panel px-2 py-1">🧠 {session.liveScore}</span>
+        <span className="rounded-[3px] bg-panel px-2 py-1">Evidências {found}/{caseData.evidence.length}</span>
+        <span className="rounded-[3px] bg-panel px-2 py-1 font-mono">{formatClock(session.clock)}</span>
+        <span className="rounded-[3px] bg-panel px-2 py-1">Pontos {session.liveScore}</span>
         <span className="col-span-3 text-slate-400">{scene.name}</span>
       </div>
       <div
-        className="relative aspect-video w-full max-w-[min(100%,calc((100dvh-7rem)*16/9))] overflow-hidden rounded-xl border border-edge shadow-2xl"
+        className={`relative aspect-video w-full overflow-hidden rounded-md border border-edge shadow-2xl ${SCENE_WIDTH}`}
         onClick={debugClick}
       >
         <AssetImage src={scene.image} alt={scene.name} kind="scene" label={scene.name} className="absolute inset-0 h-full w-full" />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/50" />
 
         {/* HUD (desktop: sobre a cena) */}
-        <div className="absolute left-3 top-3 hidden rounded-full bg-black/70 px-3 py-1 text-sm font-bold sm:block">
-          📋 Evidências: {found}/{caseData.evidence.length}
+        <div className="hud absolute left-3 top-3 hidden sm:block">
+          Evidências <b>{found}/{caseData.evidence.length}</b>
         </div>
-        <div className="absolute left-1/2 top-3 hidden -translate-x-1/2 rounded-md border border-edge bg-black/75 px-3 py-1 text-center text-sm font-bold sm:block">
-          {formatClock(session.clock)} · {scene.name}
+        <div className="hud absolute left-1/2 top-3 hidden -translate-x-1/2 sm:block">
+          <b className="font-mono">{formatClock(session.clock)}</b>
+          <span className="mx-2 text-slate-500">/</span>
+          {scene.name}
         </div>
-        <div className="absolute right-3 top-3 hidden rounded-full bg-black/70 px-3 py-1 text-sm font-bold sm:block">
-          🧠 Pontuação: {session.liveScore}
+        <div className="hud absolute right-3 top-3 hidden sm:block">
+          Pontuação <b>{session.liveScore}</b>
         </div>
 
-        {hotspots.map((h, i) => (
-          <Hotspot key={h.id} h={h} index={i + 1} done={isDone(h)} showLabel={settings.showLabels} onClick={() => g.inspect(h.id)} />
+        {hotspots.map((h) => (
+          <Hotspot key={h.id} h={h} onClick={() => g.inspect(h.id)} />
         ))}
 
         {g.sceneMessage && (
           <div className="fade-up absolute inset-x-2 bottom-2 rounded-lg border border-edge bg-black/85 p-3 text-sm sm:inset-x-auto sm:left-1/2 sm:w-[70%] sm:-translate-x-1/2">
             <button className="float-right ml-2 text-slate-400 hover:text-white" onClick={(e) => { e.stopPropagation(); g.clearSceneMessage(); }} aria-label="Fechar">
-              ✕
+              <IconClose className="h-4 w-4" />
             </button>
             {g.sceneMessage}
           </div>
@@ -204,27 +203,26 @@ export function Scene() {
       </div>
 
       {/* Barra de ações */}
-      <nav className="flex w-full max-w-5xl flex-wrap items-center justify-center gap-2">
+      <nav className="flex w-full max-w-5xl flex-wrap items-center justify-center gap-1.5">
         <button className="btn" onClick={() => g.setInventory(true)}>
-          🎒 Inventário
+          Inventário
         </button>
         <button className="btn" onClick={() => g.setMap(true)}>
-          🗺️ Mapa
+          Mapa
         </button>
         <button className="btn" onClick={() => g.go('lab')}>
-          🔬 Laboratório{pendingLab > 0 && <span className="ml-1 rounded bg-amber-600 px-1.5 text-[10px] text-black">{pendingLab}</span>}
+          Laboratório
+          {pendingLab > 0 && <span className="rounded-[2px] bg-clue px-1.5 py-px text-[10px] leading-none text-black">{pendingLab}</span>}
         </button>
         <button className="btn" onClick={() => g.go('suspects')}>
-          👥 Suspeitos
+          Suspeitos
         </button>
-        <button className="btn btn-primary" onClick={() => g.go('board')}>
-          🗂️ Quadro Investigativo
+        <button className="btn" onClick={() => g.go('board')}>
+          Quadro investigativo
         </button>
+        <span className="mx-1 hidden h-6 w-px bg-white/10 sm:block" aria-hidden />
         <button className="btn btn-danger" onClick={() => g.go('accusation')}>
-          ⚖️ Acusar
-        </button>
-        <button className="btn" onClick={() => g.go('menu')} title="Menu principal">
-          ☰
+          Acusar
         </button>
       </nav>
 

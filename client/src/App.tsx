@@ -11,7 +11,9 @@ import { Result } from './screens/Result';
 import { Scene } from './screens/Scene';
 import { Credits, Settings } from './screens/SettingsCredits';
 import { Suspects } from './screens/Suspects';
+import { Tutorial } from './screens/Tutorial';
 import { useGame, type Screen } from './store/game';
+import { NEEDS_SESSION } from './store/routes';
 
 const SCREENS: Record<Screen, () => JSX.Element | null> = {
   menu: Menu,
@@ -24,24 +26,28 @@ const SCREENS: Record<Screen, () => JSX.Element | null> = {
   accusation: Accusation,
   result: Result,
   settings: Settings,
+  tutorial: Tutorial,
   credits: Credits,
 };
 
-// Telas de jogo que exigem sessão ativa (sem ela, volta ao menu).
-const NEEDS_SESSION: Screen[] = ['briefing', 'scene', 'lab', 'suspects', 'interrogation', 'board', 'accusation', 'result'];
-
 export function App() {
-  const { boot, bootError, screen, session, go } = useGame();
+  const { boot, booted, bootError, screen, session, suspectId, go } = useGame();
 
   useEffect(() => {
     boot();
   }, [boot]);
 
+  // Redirecionamentos usam replace para não prender o botão "voltar" do navegador.
   useEffect(() => {
-    if (NEEDS_SESSION.includes(screen) && !session) go('menu');
+    if (!booted) return;
+    if (NEEDS_SESSION.includes(screen) && !session) go('menu', undefined, { replace: true });
     // Caso encerrado: só a tela de resultado faz sentido.
-    if (session?.finished && ['scene', 'lab', 'suspects', 'interrogation', 'board', 'accusation'].includes(screen)) go('result');
-  }, [screen, session, go]);
+    else if (session?.finished && ['briefing', 'scene', 'lab', 'suspects', 'interrogation', 'board', 'accusation'].includes(screen))
+      go('result', undefined, { replace: true });
+    else if (session && !session.finished && screen === 'result') go('scene', undefined, { replace: true });
+    // Link de interrogatório com suspeito inexistente.
+    else if (screen === 'interrogation' && session && !(suspectId && session.suspects[suspectId])) go('suspects', undefined, { replace: true });
+  }, [booted, screen, session, suspectId, go]);
 
   if (bootError) {
     return (
@@ -57,6 +63,7 @@ export function App() {
     );
   }
 
+  if (!booted) return null;
   const Current = SCREENS[screen];
   return (
     <>

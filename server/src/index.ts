@@ -31,5 +31,6 @@ app.listen(port, () => {
   const p = getProvider();
   console.log(`CASO 404: servidor em http://localhost:${port}`);
   console.log(`Caso carregado: ${c.title} (${c.characters.length} personagens, ${c.evidence.length} evidências)`);
-  console.log(`Diálogo: ${p.name === 'claude' ? `Claude (${p.model})` : 'Mock roteirizado (defina ANTHROPIC_API_KEY para usar o Claude)'}`);
+  const label = { claude: 'Claude', gemini: 'Gemini', mock: '' }[p.name];
+  console.log(`Diálogo: ${p.name !== 'mock' ? `${label} (${p.model})` : 'Mock roteirizado (defina GEMINI_API_KEY ou ANTHROPIC_API_KEY)'}`);
 });

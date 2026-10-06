@@ -89,6 +89,10 @@ Fotografia realista de uma sala de monitoramento de segurança no térreo de um 
 
 ## 3. Evidências: `client/public/assets/case-001/evidence/`
 
+**Atual:** as 10 evidências usam ilustrações vetoriais (`.svg`) geradas por `node scripts/gen-evidence-svg.mjs`, todas no mesmo estilo de foto de perícia (fundo escuro, luz fria, marcador amarelo e régua, sem texto). Para editar uma ilustração, ajuste o script e rode de novo.
+
+**Para trocar por fotos geradas por IA:** gere com os prompts abaixo, salve com o mesmo nome em `.png` e troque a extensão do campo `image` da evidência no `case.json`.
+
 Formato: 4:3, close de objeto sobre fundo escuro, como foto de perícia.
 
 Base comum (cole no início de cada prompt):
@@ -113,10 +117,10 @@ Fotografia realista de perícia forense, close de objeto sobre superfície escur
 
 ## 4. Reposicionar hotspots ao trocar uma cena
 
-Os pontos clicáveis ficam em `case-data/case-001/case.json` → `hotspots`, com `x`/`y` em **% da cena exibida em 16:9**.
+Os pontos clicáveis ficam em `case-data/case-001/case.json` → `hotspots`. `x`/`y` são o **centro** da área e `w`/`h` a largura e a altura, tudo em **% da cena exibida em 16:9**. A área fica invisível e só mostra cantos de destaque quando o mouse passa por cima.
 
 1. Rode o jogo e abra `http://localhost:5173/?debug=1`.
-2. Vá até a cena e clique sobre cada objeto: um aviso mostra `"x": .., "y": ..` (também sai no console).
-3. Copie os valores para o hotspot correspondente no `case.json` e reinicie o servidor.
+2. Vá até a cena: no modo debug as áreas aparecem contornadas em vermelho. Clique no centro de cada objeto e um aviso mostra `"x": .., "y": ..` (também sai no console).
+3. Copie os valores para o hotspot correspondente no `case.json`, ajuste `w`/`h` para cobrir o objeto e reinicie o servidor.
 
 > Se a imagem não for 16:9, o jogo corta as bordas (`object-cover`). Por isso as coordenadas devem sempre ser medidas no jogo, não na imagem original.

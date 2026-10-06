@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { IconBack } from '../components/icons';
 import { useGame } from '../store/game';
 
 function Shell({ title, children }: { title: string; children: ReactNode }) {
@@ -7,8 +8,9 @@ function Shell({ title, children }: { title: string; children: ReactNode }) {
   return (
     <div className="mx-auto flex min-h-full max-w-2xl flex-col gap-6 px-4 py-8 sm:px-6">
       <div className="flex items-center gap-3">
-        <button className="btn" onClick={() => go(hasSession ? 'scene' : 'menu')}>
-          ← Voltar
+        <button className="btn pl-2.5" onClick={() => go(hasSession ? 'scene' : 'menu')}>
+          <IconBack />
+          Voltar
         </button>
         <h1 className="text-2xl font-black tracking-wide">{title}</h1>
       </div>
@@ -39,22 +41,17 @@ export function Settings() {
         value={settings.typewriter}
         onChange={(v) => updateSettings({ typewriter: v })}
       />
-      <Toggle
-        label="Mostrar nomes dos pontos de interesse"
-        hint="Exibe o rótulo de cada hotspot na cena, sem precisar passar o mouse."
-        value={settings.showLabels}
-        onChange={(v) => updateSettings({ showLabels: v })}
-      />
       <div className="panel p-4 text-sm">
         <p className="label mb-2">Motor de diálogo</p>
-        {health?.provider === 'claude' ? (
+        {health && health.provider !== 'mock' ? (
           <p>
-            Conectado ao <b>Claude</b> ({health.model}). As falas são geradas em tempo real e validadas pelo servidor.
+            Conectado ao <b>{health.provider === 'gemini' ? 'Gemini' : 'Claude'}</b> ({health.model}). As falas são geradas em
+            tempo real e validadas pelo servidor.
           </p>
         ) : (
           <p>
-            Modo <b>roteirizado</b>: as falas vêm do roteiro do caso. Para usar o Claude, defina <code>ANTHROPIC_API_KEY</code> no
-            arquivo <code>.env</code> e reinicie o servidor.
+            Modo <b>roteirizado</b>: as falas vêm do roteiro do caso. Para usar IA, defina <code>GEMINI_API_KEY</code> (ou{' '}
+            <code>ANTHROPIC_API_KEY</code>) no arquivo <code>.env</code> e reinicie o servidor.
           </p>
         )}
       </div>
@@ -64,8 +61,9 @@ export function Settings() {
 
 export function Credits() {
   const rows: [string, string, string][] = [
-    ['Diálogos dos suspeitos (tempo real)', 'Claude (Anthropic), via API', 'Texto'],
-    ['Retratos, cenas e evidências', 'Bing Image Creator (DALL·E 3)', 'Imagem'],
+    ['Diálogos dos suspeitos (tempo real)', 'Gemini (Google), via API', 'Texto'],
+    ['Retratos e cenas', 'Bing Image Creator (DALL·E 3)', 'Imagem'],
+    ['Ilustrações das evidências (SVG)', 'Claude Code (Anthropic)', 'Imagem vetorial'],
     ['Roteiro do caso, código e documentação', 'Claude Code (Anthropic), com revisão do grupo', 'Texto/Código'],
   ];
   return (

@@ -27,7 +27,7 @@ export function Accusation() {
 
   return (
     <div className="flex min-h-full flex-col">
-      <ScreenHeader title="⚖️ Acusação final" subtitle="Só há uma chance. A nota reflete toda a investigação, não apenas o nome do culpado." />
+      <ScreenHeader title="Acusação final" subtitle="Só há uma chance. A nota reflete toda a investigação, não apenas o nome do culpado." />
       <div className="mx-auto w-full max-w-5xl flex-1 space-y-6 p-4 sm:p-6">
         <section>
           <p className="label mb-2">1. Quem matou Carlos Mendes?</p>

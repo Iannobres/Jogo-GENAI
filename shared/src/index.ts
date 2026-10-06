@@ -48,6 +48,8 @@ export interface PublicHotspot {
   sceneId: string;
   x: number; // % da largura
   y: number; // % da altura
+  w: number; // largura da área clicável, % da cena
+  h: number; // altura da área clicável, % da cena
   label: string;
   kind: 'evidence' | 'inspect';
   evidenceId?: string;
@@ -200,7 +202,7 @@ export interface SessionView {
 
 export interface HealthResponse {
   ok: true;
-  provider: 'mock' | 'claude';
+  provider: 'mock' | 'claude' | 'gemini';
   model?: string;
 }
 
@@ -221,7 +223,7 @@ export interface InterrogateResponse {
   session: SessionView;
   lines: DialogueLine[];
   newFacts: KnownFact[];
-  provider: 'mock' | 'claude' | 'engine';
+  provider: 'mock' | 'claude' | 'gemini' | 'engine';
 }
 
 export interface ApiError {

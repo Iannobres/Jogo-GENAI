@@ -176,48 +176,48 @@
   ],
 
   "hotspots": [
-    { "id": "h_copo", "sceneId": "sala404", "x": 53.7, "y": 76.9, "label": "Copo derrubado", "kind": "evidence", "evidenceId": "copo" },
-    { "id": "h_caixa", "sceneId": "sala404", "x": 57.7, "y": 90, "label": "Caixa de remédio", "kind": "evidence", "evidenceId": "caixa_remedio" },
-    { "id": "h_celular", "sceneId": "sala404", "x": 13.2, "y": 81.9, "label": "Celular da vítima", "kind": "evidence", "evidenceId": "celular" },
-    { "id": "h_contrato", "sceneId": "sala404", "x": 33.7, "y": 76.2, "label": "Papéis espalhados", "kind": "evidence", "evidenceId": "contrato" },
-    { "id": "h_agenda", "sceneId": "sala404", "x": 61.7, "y": 67.7, "label": "Agenda de couro", "kind": "evidence", "evidenceId": "agenda" },
-    { "id": "h_porta", "sceneId": "sala404", "x": 6, "y": 50.6, "label": "Porta e fechadura", "kind": "evidence", "evidenceId": "fechadura" },
+    { "id": "h_copo", "sceneId": "sala404", "x": 53.7, "y": 76.5, "w": 6, "h": 14, "label": "Copo derrubado", "kind": "evidence", "evidenceId": "copo" },
+    { "id": "h_caixa", "sceneId": "sala404", "x": 61.3, "y": 90.5, "w": 6, "h": 7, "label": "Caixa de remédio", "kind": "evidence", "evidenceId": "caixa_remedio" },
+    { "id": "h_celular", "sceneId": "sala404", "x": 13.2, "y": 81, "w": 7, "h": 8, "label": "Celular da vítima", "kind": "evidence", "evidenceId": "celular" },
+    { "id": "h_contrato", "sceneId": "sala404", "x": 33.7, "y": 76, "w": 20, "h": 10, "label": "Papéis espalhados", "kind": "evidence", "evidenceId": "contrato" },
+    { "id": "h_agenda", "sceneId": "sala404", "x": 61.7, "y": 68, "w": 12, "h": 7, "label": "Agenda de couro", "kind": "evidence", "evidenceId": "agenda" },
+    { "id": "h_porta", "sceneId": "sala404", "x": 5.5, "y": 46, "w": 11, "h": 70, "label": "Porta e fechadura", "kind": "evidence", "evidenceId": "fechadura" },
     {
-      "id": "h_corpo", "sceneId": "sala404", "x": 79.3, "y": 79, "label": "Corpo da vítima", "kind": "inspect",
+      "id": "h_corpo", "sceneId": "sala404", "x": 80.5, "y": 79, "w": 21, "h": 20, "label": "Corpo da vítima", "kind": "inspect",
       "text": "Carlos Mendes está caído de lado. Não há ferimentos nem sinais de luta. Há vômito recente no carpete. O legista estima a morte entre 22h45 e 23h15 e suspeita de intoxicação.",
       "facts": ["f_corpo"]
     },
     {
-      "id": "h_janela", "sceneId": "sala404", "x": 49.7, "y": 36.3, "label": "Janela", "kind": "inspect",
+      "id": "h_janela", "sceneId": "sala404", "x": 49, "y": 36.5, "w": 28, "h": 42, "label": "Janela", "kind": "inspect",
       "text": "A janela está travada por dentro. É o 4º andar, sem sacada nem acesso externo. Ninguém saiu por aqui.",
       "facts": ["f_janela"]
     },
     {
-      "id": "h_camera404", "sceneId": "sala404", "x": 88.9, "y": 10.7, "label": "Câmera de segurança", "kind": "inspect",
+      "id": "h_camera404", "sceneId": "sala404", "x": 88.9, "y": 10.7, "w": 5, "h": 8, "label": "Câmera de segurança", "kind": "inspect",
       "text": "A câmera do teto aponta para a porta e o corredor. As gravações ficam na sala de monitoramento, no térreo."
     },
 
-    { "id": "h_lixeira", "sceneId": "corredor", "x": 72, "y": 78, "label": "Lixeira da copa", "kind": "evidence", "evidenceId": "cartela" },
+    { "id": "h_lixeira", "sceneId": "corredor", "x": 55, "y": 62, "w": 6.5, "h": 20, "label": "Lixeira da copa", "kind": "evidence", "evidenceId": "cartela" },
     {
-      "id": "h_elevador", "sceneId": "corredor", "x": 15, "y": 48, "label": "Elevador", "kind": "inspect",
+      "id": "h_elevador", "sceneId": "corredor", "x": 17.5, "y": 51, "w": 13, "h": 80, "label": "Elevador", "kind": "inspect",
       "text": "O único elevador do andar. Uma câmera registra quem entra e sai. A escada de emergência tem alarme e não foi aberta esta noite."
     },
     {
-      "id": "h_copa", "sceneId": "corredor", "x": 58, "y": 52, "label": "Bancada da copa", "kind": "inspect",
+      "id": "h_copa", "sceneId": "corredor", "x": 40.3, "y": 49, "w": 17, "h": 13, "label": "Bancada da copa", "kind": "inspect",
       "text": "Garrafa de whisky pela metade e copos limpos. Um bilhete colado no armário diz: 'Whisky do Dr. Carlos — servir às 20h. M.'",
       "facts": ["f_bilhete_whisky"]
     },
     {
-      "id": "h_mesa_mariana", "sceneId": "corredor", "x": 35, "y": 70, "label": "Mesa da assistente", "kind": "inspect",
+      "id": "h_mesa_mariana", "sceneId": "corredor", "x": 79, "y": 84, "w": 40, "h": 30, "label": "Mesa da assistente", "kind": "inspect",
       "text": "Na mesa de Mariana Costa há um aviso de desligamento em nome dela, com data para o fim do mês, assinado por Carlos Mendes.",
       "facts": ["f_mariana_aviso"]
     },
 
-    { "id": "h_cameras", "sceneId": "monitoramento", "x": 40, "y": 40, "label": "Monitores das câmeras", "kind": "evidence", "evidenceId": "log_cameras" },
-    { "id": "h_acesso", "sceneId": "monitoramento", "x": 70, "y": 55, "label": "Controle de acesso", "kind": "evidence", "evidenceId": "log_cartoes" },
-    { "id": "h_servidor", "sceneId": "monitoramento", "x": 88, "y": 45, "label": "Rack do servidor", "kind": "evidence", "evidenceId": "log_sistema" },
+    { "id": "h_cameras", "sceneId": "monitoramento", "x": 57.5, "y": 35, "w": 32, "h": 67, "label": "Monitores das câmeras", "kind": "evidence", "evidenceId": "log_cameras" },
+    { "id": "h_acesso", "sceneId": "monitoramento", "x": 80.4, "y": 39, "w": 9.5, "h": 16, "label": "Controle de acesso", "kind": "evidence", "evidenceId": "log_cartoes" },
+    { "id": "h_servidor", "sceneId": "monitoramento", "x": 93, "y": 52, "w": 13, "h": 92, "label": "Rack do servidor", "kind": "evidence", "evidenceId": "log_sistema" },
     {
-      "id": "h_livro", "sceneId": "monitoramento", "x": 22, "y": 70, "label": "Livro de ocorrências", "kind": "inspect",
+      "id": "h_livro", "sceneId": "monitoramento", "x": 24, "y": 86, "w": 23, "h": 22, "label": "Livro de ocorrências", "kind": "inspect",
       "text": "Anotação à caneta: '23h38, ronda no 4º andar. Sala 404 trancada, luz acesa, sem resposta. 23h40, aberta com a chave mestra. Vítima no chão. Acionei a polícia. — R. Alves'",
       "facts": ["f_ocorrencia"]
     }
@@ -227,7 +227,7 @@
     {
       "id": "copo", "sceneId": "sala404", "name": "Copo com resíduo",
       "description": "Copo de whisky caído ao lado da mesa, com um resíduo esbranquiçado no fundo.",
-      "image": "/assets/case-001/evidence/copo.png",
+      "image": "/assets/case-001/evidence/copo.svg",
       "facts": ["f_copo"],
       "lab": {
         "digitais": { "result": "Digitais de Carlos Mendes e de Mariana Costa.", "facts": ["f_lab_copo_digitais"] },
@@ -238,7 +238,7 @@
     {
       "id": "caixa_remedio", "sceneId": "sala404", "name": "Caixa de digoxina",
       "description": "Caixa de digoxina 0,25 mg receitada a Carlos Mendes, sobre a mesa. Deveria ter duas cartelas; só resta uma.",
-      "image": "/assets/case-001/evidence/caixa-digoxina.png",
+      "image": "/assets/case-001/evidence/caixa-digoxina.svg",
       "facts": ["f_caixa"],
       "lab": {
         "digitais": { "result": "Digitais de Carlos Mendes e de João Silva na caixa.", "facts": ["f_lab_caixa_digitais"] },
@@ -248,7 +248,7 @@
     {
       "id": "celular", "sceneId": "sala404", "name": "Celular da vítima",
       "description": "Smartphone de Carlos, desbloqueado pela perícia. Uma conversa recente chama atenção.",
-      "image": "/assets/case-001/evidence/celular.png",
+      "image": "/assets/case-001/evidence/celular.svg",
       "facts": ["f_mensagem_ameaca"],
       "lab": {
         "digitais": { "result": "Apenas digitais de Carlos Mendes." }
@@ -257,7 +257,7 @@
     {
       "id": "contrato", "sceneId": "sala404", "name": "Contrato de dívida",
       "description": "Contrato de empréstimo entre sócios espalhado entre os papéis da mesa, com anotação à mão.",
-      "image": "/assets/case-001/evidence/contrato.png",
+      "image": "/assets/case-001/evidence/contrato.svg",
       "facts": ["f_divida"],
       "lab": {
         "digitais": { "result": "Digitais de Carlos Mendes e de Mariana Costa (que arquiva os documentos)." }
@@ -266,14 +266,14 @@
     {
       "id": "agenda", "sceneId": "sala404", "name": "Agenda de Carlos",
       "description": "Agenda de couro aberta no dia do crime, com dois compromissos à noite.",
-      "image": "/assets/case-001/evidence/agenda.png",
+      "image": "/assets/case-001/evidence/agenda.svg",
       "facts": ["f_agenda"],
       "lab": {}
     },
     {
       "id": "fechadura", "sceneId": "sala404", "name": "Fechadura e chave",
       "description": "Fechadura da Sala 404. A chave de Carlos estava do lado de dentro; o segurança a empurrou com a chave mestra para abrir.",
-      "image": "/assets/case-001/evidence/fechadura.png",
+      "image": "/assets/case-001/evidence/fechadura.svg",
       "facts": ["f_porta"],
       "lab": {
         "digitais": { "result": "Na chave interna, apenas digitais de Carlos Mendes. Foi ele quem trancou a porta.", "facts": ["f_lab_chave"] }
@@ -282,28 +282,28 @@
     {
       "id": "log_cameras", "sceneId": "monitoramento", "name": "Gravações das câmeras",
       "description": "Registro das câmeras do térreo e do 4º andar entre 20h e 00h.",
-      "image": "/assets/case-001/evidence/log-cameras.png",
+      "image": "/assets/case-001/evidence/log-cameras.svg",
       "facts": ["f_cameras"],
       "lab": {}
     },
     {
       "id": "log_cartoes", "sceneId": "monitoramento", "name": "Log de crachás",
       "description": "Registro do controle de acesso por crachá das portas e da copa.",
-      "image": "/assets/case-001/evidence/log-cartoes.png",
+      "image": "/assets/case-001/evidence/log-cartoes.svg",
       "facts": ["f_cartoes"],
       "lab": {}
     },
     {
       "id": "log_sistema", "sceneId": "monitoramento", "name": "Log do servidor",
       "description": "Registro de acessos e alertas do servidor da empresa.",
-      "image": "/assets/case-001/evidence/log-servidor.png",
+      "image": "/assets/case-001/evidence/log-servidor.svg",
       "facts": ["f_sistema"],
       "lab": {}
     },
     {
       "id": "cartela", "sceneId": "corredor", "name": "Cartela vazia na lixeira",
       "description": "Cartela de digoxina vazia e amassada no fundo da lixeira da copa, com pó branco entre as bolhas.",
-      "image": "/assets/case-001/evidence/cartela.png",
+      "image": "/assets/case-001/evidence/cartela.svg",
       "facts": ["f_cartela"],
       "expiresAt": 1530,
       "lostText": "A lixeira da copa está vazia e com saco novo. A equipe de limpeza passou à 01h30.",

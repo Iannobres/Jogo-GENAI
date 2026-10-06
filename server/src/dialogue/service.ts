@@ -3,18 +3,21 @@ import type { CaseData } from '../case/schema';
 import { knowsFact, type GameState } from '../engine/gameState';
 import { normalize, type TurnPlan } from '../engine/interrogation';
 import { ClaudeProvider } from './claudeProvider';
+import { GeminiProvider } from './geminiProvider';
 import { mockProvider } from './mockProvider';
 import type { DialogueProvider, DialogueRequest } from './provider';
 import { validateOutput } from './validator';
 
 let provider: DialogueProvider | null = null;
 
-/** Claude quando há ANTHROPIC_API_KEY; caso contrário, Mock roteirizado. */
+/** Gemini quando há GEMINI_API_KEY; senão Claude com ANTHROPIC_API_KEY; senão Mock roteirizado. */
 export function getProvider(): DialogueProvider {
   if (!provider) {
-    provider = process.env.ANTHROPIC_API_KEY
-      ? new ClaudeProvider(process.env.CLAUDE_MODEL || 'claude-opus-5')
-      : mockProvider;
+    provider = process.env.GEMINI_API_KEY
+      ? new GeminiProvider(process.env.GEMINI_MODEL || 'gemini-2.5-flash', process.env.GEMINI_API_KEY)
+      : process.env.ANTHROPIC_API_KEY
+        ? new ClaudeProvider(process.env.CLAUDE_MODEL || 'claude-opus-5')
+        : mockProvider;
   }
   return provider;
 }
@@ -60,7 +63,7 @@ export async function runTurn(s: GameState, c: CaseData, plan: TurnPlan): Promis
       playerText: plan.playerText,
     };
     const key = [plan.suspectId, plan.kind, plan.emotion, plan.directive, normalize(plan.playerText)].join('|');
-    const cached = p.name === 'claude' && plan.kind === 'pergunta' ? cache.get(key) : undefined;
+    const cached = p.name !== 'mock' && plan.kind === 'pergunta' ? cache.get(key) : undefined;
     if (cached) {
       reply = { ...cached, emocao: plan.emotion };
     } else if (p.name !== 'mock') {
@@ -78,7 +81,7 @@ export async function runTurn(s: GameState, c: CaseData, plan: TurnPlan): Promis
             console.warn(`[validator] ${character.name}: ${feedback}`);
           }
         } catch (err) {
-          console.error(`[claude] ${(err as Error).message}`);
+          console.error(`[${p.name}] ${(err as Error).message}`);
           break;
         }
       }

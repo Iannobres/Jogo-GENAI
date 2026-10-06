@@ -12,6 +12,7 @@ import type {
   SessionView,
 } from '@caso404/shared';
 import { api } from '../api';
+import { NEEDS_SESSION, parsePath, syncUrl } from './routes';
 
 export type Screen =
   | 'menu'
@@ -24,6 +25,7 @@ export type Screen =
   | 'accusation'
   | 'result'
   | 'settings'
+  | 'tutorial'
   | 'credits';
 
 export interface Toast {
@@ -34,7 +36,6 @@ export interface Toast {
 
 export interface Settings {
   typewriter: boolean;
-  showLabels: boolean;
 }
 
 const SESSION_KEY = 'caso404.session';
@@ -59,9 +60,10 @@ const storage = {
 };
 
 function loadSettings(): Settings {
-  const fallback: Settings = { typewriter: true, showLabels: false };
+  const fallback: Settings = { typewriter: true };
   try {
-    return { ...fallback, ...JSON.parse(storage.get(SETTINGS_KEY) ?? '{}') };
+    const saved = JSON.parse(storage.get(SETTINGS_KEY) ?? '{}');
+    return { typewriter: typeof saved.typewriter === 'boolean' ? saved.typewriter : fallback.typewriter };
   } catch {
     return fallback;
   }
@@ -81,10 +83,13 @@ interface GameStore {
   toasts: Toast[];
   busy: boolean;
   bootError: string | null;
+  /** Fica true depois de carregar o caso e, se a URL pedir, a sessão salva. */
+  booted: boolean;
   settings: Settings;
 
   boot(): Promise<void>;
-  go(screen: Screen, suspectId?: string): void;
+  /** Troca de tela e atualiza a URL. `replace` não cria entrada nova no histórico (redirecionamentos). */
+  go(screen: Screen, suspectId?: string, opts?: { replace?: boolean }): void;
   back(): void;
   setInventory(open: boolean): void;
   setMap(open: boolean): void;
@@ -105,6 +110,7 @@ interface GameStore {
 }
 
 let toastSeq = 0;
+const initialRoute = parsePath(location.pathname);
 
 export const useGame = create<GameStore>((set, get) => {
   /** Executa uma chamada, trata erro com toast e evita cliques duplos. */
@@ -142,15 +148,16 @@ export const useGame = create<GameStore>((set, get) => {
     health: null,
     session: null,
     savedSessionId: storage.get(SESSION_KEY),
-    screen: 'menu',
+    screen: initialRoute.screen,
     previousScreen: 'menu',
-    suspectId: null,
+    suspectId: initialRoute.suspectId ?? null,
     inventoryOpen: false,
     mapOpen: false,
     sceneMessage: null,
     toasts: [],
     busy: false,
     bootError: null,
+    booted: false,
     settings: loadSettings(),
 
     async boot() {
@@ -159,10 +166,24 @@ export const useGame = create<GameStore>((set, get) => {
         set({ caseData, health, bootError: null });
       } catch {
         set({ bootError: 'Não foi possível falar com o servidor. Rode "npm run dev" na raiz do projeto.' });
+        return;
       }
+
+      // Abriu direto numa tela de jogo (link ou F5): retoma a sessão salva antes de mostrar.
+      const { screen, savedSessionId, session } = get();
+      if (NEEDS_SESSION.includes(screen) && !session && savedSessionId) {
+        try {
+          setSession(await api.getSession(savedSessionId));
+        } catch {
+          storage.set(SESSION_KEY, null);
+          set({ savedSessionId: null });
+        }
+      }
+      syncUrl(get().screen, get().suspectId, 'replace');
+      set({ booted: true });
     },
 
-    go(screen, suspectId) {
+    go(screen, suspectId, opts) {
       set((st) => ({
         screen,
         previousScreen: st.screen,
@@ -170,6 +191,7 @@ export const useGame = create<GameStore>((set, get) => {
         inventoryOpen: false,
         mapOpen: false,
       }));
+      syncUrl(screen, get().suspectId, opts?.replace ? 'replace' : 'push');
     },
     back() {
       get().go(get().previousScreen === get().screen ? 'scene' : get().previousScreen);
@@ -288,3 +310,16 @@ export function useCaseLookup() {
     scene: (id: string) => caseData?.scenes.find((s) => s.id === id),
   };
 }
+
+// Voltar/avançar do navegador: a URL manda na tela.
+window.addEventListener('popstate', () => {
+  const { screen, suspectId } = parsePath(location.pathname);
+  useGame.setState((st) => ({
+    screen,
+    previousScreen: st.screen,
+    suspectId: suspectId ?? st.suspectId,
+    inventoryOpen: false,
+    mapOpen: false,
+  }));
+  syncUrl(screen, useGame.getState().suspectId, 'replace');
+});

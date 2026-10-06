@@ -1,6 +1,6 @@
 /**
- * Teste de consistência do diálogo contra o Claude real (gasta créditos de API).
- * Uso: ANTHROPIC_API_KEY=... npm run test:llm
+ * Teste de consistência do diálogo contra o LLM real (Gemini ou Claude; gasta créditos de API).
+ * Uso: GEMINI_API_KEY=... (ou ANTHROPIC_API_KEY=...) npm run test:llm
  *
  * Roda um roteiro de perguntas e confrontos com João Silva e checa que as falas
  * geradas seguem a ficha do caso: mente sobre o horário antes do confronto,
@@ -17,8 +17,8 @@ const { createState, inspect, moveScene, sendToLab, waitForLab } = await import(
 const { planConfront, planQuestion, planShowEvidence } = await import('../src/engine/interrogation');
 const { getProvider, runTurn } = await import('../src/dialogue/service');
 
-if (!process.env.ANTHROPIC_API_KEY) {
-  console.error('Defina ANTHROPIC_API_KEY no .env para rodar este teste.');
+if (!process.env.GEMINI_API_KEY && !process.env.ANTHROPIC_API_KEY) {
+  console.error('Defina GEMINI_API_KEY ou ANTHROPIC_API_KEY no .env para rodar este teste.');
   process.exit(1);
 }
 
@@ -53,7 +53,7 @@ waitForLab(s, c);
 console.log('1) Perguntas antes do confronto');
 for (const q of ['Onde você estava às 22h?', 'A que horas o senhor saiu do prédio?']) {
   const r = await turn(planQuestion(s, c, 'joao', q));
-  check(r.provider === 'claude', 'resposta veio do Claude (não do fallback)');
+  check(r.provider === 'claude' || r.provider === 'gemini', 'resposta veio do LLM (não do fallback)');
   check(/21/.test(r.text) && !/22h?13/.test(r.text), 'sustenta a mentira das 21h');
   check(!confession.test(r.text), 'não confessa');
 }

@@ -19,7 +19,7 @@ export interface DialogueOutput {
 }
 
 export interface DialogueProvider {
-  readonly name: 'mock' | 'claude';
+  readonly name: 'mock' | 'claude' | 'gemini';
   readonly model?: string;
   generate(req: DialogueRequest, feedback?: string): Promise<DialogueOutput>;
 }

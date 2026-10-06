@@ -62,6 +62,9 @@ export const caseSchema = z.object({
       sceneId: z.string(),
       x: z.number().min(0).max(100),
       y: z.number().min(0).max(100),
+      /** Largura e altura da área clicável, em % da cena (centro em x/y). */
+      w: z.number().min(1).max(100).optional(),
+      h: z.number().min(1).max(100).optional(),
       label: z.string(),
       kind: z.enum(['evidence', 'inspect']),
       evidenceId: z.string().optional(),

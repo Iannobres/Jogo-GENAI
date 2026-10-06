@@ -31,6 +31,8 @@ export function toPublicCase(c: CaseData): PublicCase {
       sceneId: h.sceneId,
       x: h.x,
       y: h.y,
+      w: h.w ?? 8,
+      h: h.h ?? 12,
       label: h.label,
       kind: h.kind,
       ...(h.evidenceId ? { evidenceId: h.evidenceId } : {}),

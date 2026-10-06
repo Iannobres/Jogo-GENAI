@@ -22,27 +22,31 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+@layer components {
 .btn {
-  @apply rounded-md border border-edge bg-panel/80 px-4 py-2 text-sm font-semibold tracking-wide text-slate-100 transition hover:border-accent hover:bg-accent-strong/40 disabled:cursor-not-allowed disabled:opacity-40;
+  @apply inline-flex items-center justify-center gap-2 rounded-[3px] border border-white/10 bg-[#0c1322] px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.14em] text-slate-300 transition-colors duration-150 select-none;
+  @apply hover:border-white/30 hover:bg-[#131c30] hover:text-white active:translate-y-px;
+  @apply focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent;
+  @apply disabled:pointer-events-none disabled:opacity-35;
 }
+/* Ação principal: cor de papel de dossiê, contrasta com o fundo azul-noite. */
 .btn-primary {
-  @apply border-accent/60 bg-accent-strong hover:bg-accent-strong/80;
+  @apply border-transparent bg-[#e9e3d5] text-[#0a0f1a] hover:border-transparent hover:bg-white hover:text-[#0a0f1a];
 }
 .btn-danger {
-  @apply border-red-700/60 bg-danger hover:bg-danger/80;
+  @apply border-red-500/40 bg-red-950/30 text-red-300 hover:border-red-400/70 hover:bg-red-900/40 hover:text-red-100;
+}
+/* Botão só com ícone (fechar, menu). */
+.btn-icon {
+  @apply px-2.5;
 }
 .panel {
-  @apply rounded-xl border border-edge bg-panel/85 backdrop-blur;
+  @apply rounded-md border border-edge bg-panel/85 backdrop-blur;
 }
 .label {
   @apply text-[11px] font-bold uppercase tracking-[0.18em] text-slate-400;
 }
-
-@keyframes pulse-ring {
-  0% { box-shadow: 0 0 0 0 rgba(245, 197, 66, 0.55); }
-  100% { box-shadow: 0 0 0 14px rgba(245, 197, 66, 0); }
 }
-.hotspot-pulse { animation: pulse-ring 1.8s ease-out infinite; }
 
 @keyframes fade-up {
   from { opacity: 0; transform: translateY(8px); }
@@ -54,3 +58,37 @@ body {
 .typing span { animation: blink 1.2s infinite both; }
 .typing span:nth-child(2) { animation-delay: 0.2s; }
 .typing span:nth-child(3) { animation-delay: 0.4s; }
+
+/* Áreas clicáveis da cena: invisíveis até o mouse passar por cima.
+   Cantos de "visor" desenhados com gradientes, sem números nem nomes. */
+.hotspot-area {
+  --c: rgba(233, 227, 213, 0.9);
+  --l: 14px;
+  background:
+    linear-gradient(var(--c), var(--c)) top left / var(--l) 1.5px,
+    linear-gradient(var(--c), var(--c)) top left / 1.5px var(--l),
+    linear-gradient(var(--c), var(--c)) top right / var(--l) 1.5px,
+    linear-gradient(var(--c), var(--c)) top right / 1.5px var(--l),
+    linear-gradient(var(--c), var(--c)) bottom left / var(--l) 1.5px,
+    linear-gradient(var(--c), var(--c)) bottom left / 1.5px var(--l),
+    linear-gradient(var(--c), var(--c)) bottom right / var(--l) 1.5px,
+    linear-gradient(var(--c), var(--c)) bottom right / 1.5px var(--l);
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 0.18s ease, box-shadow 0.18s ease;
+}
+.hotspot-area:hover,
+.hotspot-area:focus-visible {
+  opacity: 1;
+  box-shadow: inset 0 0 0 1px rgba(233, 227, 213, 0.18), inset 0 0 40px rgba(233, 227, 213, 0.08);
+  outline: none;
+}
+.hotspot-area.debug { opacity: 1; box-shadow: inset 0 0 0 1px rgba(255, 80, 80, 0.8); }
+
+@layer components {
+/* Indicadores sobre a cena (evidências, relógio, pontuação). */
+.hud {
+  @apply rounded-[3px] border border-white/10 bg-black/65 px-3 py-1 text-[12px] font-medium uppercase tracking-[0.12em] text-slate-300 backdrop-blur-sm;
+}
+.hud b { @apply ml-1 font-bold text-white; }
+}

@@ -1,6 +1,7 @@
 import type { Emotion, EvidenceStatus } from '@caso404/shared';
 import { useEffect, useState, type ReactNode } from 'react';
 import { useGame } from '../store/game';
+import { IconBack } from './icons';
 
 export const EMOTION_STYLE: Record<Emotion, string> = {
   CALMO: 'bg-emerald-600 text-white',
@@ -36,8 +37,9 @@ export function ScreenHeader({ title, subtitle, right }: { title: string; subtit
   const go = useGame((s) => s.go);
   return (
     <header className="flex flex-wrap items-center gap-3 border-b border-edge px-4 py-3 sm:px-6">
-      <button className="btn" onClick={() => go('scene')}>
-        ← Cena
+      <button className="btn pl-2.5" onClick={() => go('scene')}>
+        <IconBack />
+        Cena
       </button>
       <div className="min-w-0 flex-1">
         <h1 className="truncate text-lg font-bold tracking-wide">{title}</h1>

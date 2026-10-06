@@ -22,7 +22,6 @@ function Line({ line, name, animate, typewriter }: { line: DialogueLine; name: s
     const strong = line.kind === 'contradicao' || line.kind === 'confirmacao';
     return (
       <p className={`fade-up mx-auto my-1 w-fit rounded-full px-3 py-1 text-center text-xs font-bold ${strong ? 'bg-clue text-black' : 'bg-slate-800 text-slate-300'}`}>
-        {line.kind === 'contradicao' ? '⚡ ' : line.kind === 'confirmacao' ? '✔ ' : 'ℹ '}
         {line.text}
       </p>
     );
@@ -45,15 +44,23 @@ export function Interrogation() {
   const [fresh, setFresh] = useState<number | null>(null);
   const [waiting, setWaiting] = useState(false);
   const scroller = useRef<HTMLDivElement>(null);
+  const input = useRef<HTMLInputElement>(null);
 
   const transcript = (suspectId && session?.suspects[suspectId]?.transcript) || [];
   useEffect(() => {
     scroller.current?.scrollTo({ top: scroller.current.scrollHeight, behavior: 'smooth' });
   }, [transcript.length, waiting]);
 
+  // O input fica desabilitado enquanto a IA responde; devolve o foco ao terminar.
+  useEffect(() => {
+    if (!busy && mode === 'ask') input.current?.focus();
+  }, [busy, mode]);
+
   if (!session || !caseData || !suspectId) return null;
-  const ch = caseData.characters.find((c) => c.id === suspectId)!;
+  const ch = caseData.characters.find((c) => c.id === suspectId);
   const sv = session.suspects[suspectId];
+  // Suspeito inexistente (link manual): o App redireciona para a lista.
+  if (!ch || !sv) return null;
   const left = caseData.questionLimit - sv.questionsUsed;
   const claims = session.heardClaims.filter((c) => c.suspectId === suspectId);
   const evidence = caseData.evidence.filter((e) => {
@@ -159,6 +166,7 @@ export function Interrogation() {
               }}
             >
               <input
+                ref={input}
                 value={text}
                 onChange={(e) => setText(e.target.value)}
                 maxLength={500}

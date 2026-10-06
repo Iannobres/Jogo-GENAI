@@ -11,6 +11,7 @@ import {
 } from '@dnd-kit/core';
 import { useState, type ReactNode } from 'react';
 import { AssetImage } from '../components/AssetImage';
+import { IconClose } from '../components/icons';
 import { ScreenHeader } from '../components/ui';
 import { useGame } from '../store/game';
 
@@ -97,14 +98,14 @@ export function Board() {
   };
 
   const tabs: [Tab, string][] = [
-    ['timeline', '🕒 Linha do tempo'],
-    ['suspects', '🔗 Suspeitos × evidências'],
-    ['notes', `📓 Caderno (${session.facts.length})`],
+    ['timeline', 'Linha do tempo'],
+    ['suspects', 'Suspeitos e evidências'],
+    ['notes', `Caderno (${session.facts.length})`],
   ];
 
   return (
     <div className="flex min-h-full flex-col">
-      <ScreenHeader title="🗂️ Quadro investigativo" subtitle="Arraste (ou toque e depois toque no destino) para montar sua teoria. O quadro é salvo automaticamente." />
+      <ScreenHeader title="Quadro investigativo" subtitle="Arraste (ou toque e depois toque no destino) para montar sua teoria. O quadro é salvo automaticamente." />
       <div className="flex gap-1 border-b border-edge px-4 pt-3 sm:px-6">
         {tabs.map(([id, label]) => (
           <button
@@ -196,7 +197,10 @@ export function Board() {
                               cycleMark(s.id);
                             }}
                           >
-                            {mark === 'suspeito' ? '🔴 Principal suspeito' : mark === 'descartado' ? '⚪ Descartado' : '◌ Marcar'}
+                            <span
+                              className={`mr-1.5 inline-block h-2 w-2 rounded-full align-middle ${mark === 'suspeito' ? 'bg-red-500' : mark === 'descartado' ? 'bg-slate-500' : 'border border-slate-500'}`}
+                            />
+                            {mark === 'suspeito' ? 'Principal suspeito' : mark === 'descartado' ? 'Descartado' : 'Marcar'}
                           </button>
                         </div>
                       </div>
@@ -211,7 +215,8 @@ export function Board() {
                             title="Remover ligação"
                             className="rounded bg-accent-strong/60 px-1.5 py-0.5 text-[10px] hover:bg-red-800"
                           >
-                            {caseData.evidence.find((x) => x.id === evId)?.name} ✕
+                            {caseData.evidence.find((x) => x.id === evId)?.name}
+                            <IconClose className="ml-1 inline h-3 w-3 align-[-2px]" />
                           </button>
                         ))}
                       </div>

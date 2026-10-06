@@ -17,11 +17,11 @@ export function Lab() {
   return (
     <div className="flex min-h-full flex-col">
       <ScreenHeader
-        title="🔬 Laboratório forense"
+        title="Laboratório forense"
         subtitle={`Relógio: ${formatClock(session.clock)}. Cada exame leva cerca de 40 minutos do relógio do caso.`}
         right={
           <button className="btn btn-primary" disabled={!next || busy} onClick={waitLab}>
-            {next ? `⏳ Aguardar laudo (${formatClock(next)})` : 'Sem exames pendentes'}
+            {next ? `Aguardar laudo (${formatClock(next)})` : 'Sem exames pendentes'}
           </button>
         }
       />
@@ -43,8 +43,8 @@ export function Lab() {
                     const job = jobs.find((j) => j.test === t);
                     return (
                       <button key={t} className="btn px-3 py-1.5 text-xs" disabled={!!job || busy} onClick={() => sendToLab(e.id, t)}>
-                        {job ? (job.status === 'concluido' ? '✓ ' : '⏳ ') : '+ '}
                         {LAB_TEST_LABEL[t]}
+                        {job && <span className="font-normal normal-case tracking-normal text-slate-400">{job.status === 'concluido' ? 'concluído' : 'em análise'}</span>}
                       </button>
                     );
                   })}

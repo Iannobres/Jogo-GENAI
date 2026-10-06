@@ -1,5 +1,6 @@
 import { formatClock } from '@caso404/shared';
 import { AssetImage } from '../components/AssetImage';
+import { IconNext } from '../components/icons';
 import { useGame } from '../store/game';
 
 export function Briefing() {
@@ -51,9 +52,13 @@ export function Briefing() {
         </div>
       </section>
 
-      <div className="flex justify-end">
+      <div className="flex flex-wrap justify-end gap-2">
+        <button className="btn px-6 py-3 uppercase tracking-[0.2em]" onClick={() => go('tutorial')}>
+          Como jogar
+        </button>
         <button className="btn btn-primary px-8 py-3 uppercase tracking-[0.2em]" onClick={() => go('scene')}>
-          Começar investigação →
+          Começar investigação
+          <IconNext />
         </button>
       </div>
     </div>

@@ -1,7 +1,7 @@
 # CASO 404
 
 **Uma investigação criminal conduzida por Inteligência Artificial Generativa.**
-Checkpoint 4 (IA Generativa e Game Design), disciplina NLP, Chatbots e Agentes Virtuais, FIAP.
+Checkpoint 5 (IA Generativa e Game Design), disciplina NLP, Chatbots e Agentes Virtuais, FIAP.
 Grupo: Gustavo Balbo Saraiva · Ian Nobres · Matheus Mikio.
 
 Um empresário é encontrado morto às 23h40 na Sala 404, com a porta trancada por dentro. O jogador explora a cena, coleta e analisa evidências, interroga cinco suspeitos e monta a linha do tempo antes da acusação final. **As falas dos suspeitos são geradas em tempo real por IA (Gemini ou Claude)**, sempre amarradas à "verdade" do caso, que fica no servidor.
